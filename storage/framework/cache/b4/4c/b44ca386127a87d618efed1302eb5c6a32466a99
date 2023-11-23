@@ -1,0 +1,13 @@
+1698665476a:1:{s:41:"paymentmethodselector/customermethods.htm";a:5:{s:8:"fileName";s:41:"paymentmethodselector/customermethods.htm";s:7:"content";s:334:"<label class="mall-label">{{ 'offline.mall::frontend.customer_payment_method.use' | trans }}</label>
+<div class="mall-payment-customer-methods">
+    {% for customerMethod in methods %}
+        {% partial __SELF__ ~ '::customermethod' method=customerMethod %}
+    {% endfor %}
+    <div data-validate-for="customer_method"></div>
+</div>";s:5:"mtime";i:1574085314;s:6:"markup";s:334:"<label class="mall-label">{{ 'offline.mall::frontend.customer_payment_method.use' | trans }}</label>
+<div class="mall-payment-customer-methods">
+    {% for customerMethod in methods %}
+        {% partial __SELF__ ~ '::customermethod' method=customerMethod %}
+    {% endfor %}
+    <div data-validate-for="customer_method"></div>
+</div>";s:4:"code";N;}}

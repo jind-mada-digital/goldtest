@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: School
+
+# Model Form Field configuration
+form: $/goldtest/site/models/school/fields.yaml
+
+# Model Class name
+modelClass: Goldtest\Site\Models\School
+
+# Default redirect location
+defaultRedirect: goldtest/site/schools
+
+# Create page
+create:
+    title: Create School
+    redirect: goldtest/site/schools/update/:id
+    redirectClose: goldtest/site/schools
+
+# Update page
+update:
+    title: Edit School
+    redirect: goldtest/site/schools
+    redirectClose: goldtest/site/schools
+
+# Preview page
+preview:
+    title: Preview School

@@ -1,0 +1,5 @@
+{
+  "require": {
+    "ticketpark/saferpay-json-api": "^1.4"
+  }
+}

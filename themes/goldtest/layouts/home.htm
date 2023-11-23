@@ -1,0 +1,119 @@
+description = "Home"
+
+[session]
+
+[localePicker]
+forceUrl = 1
+
+[staticPage]
+useContent = 0
+==
+<!DOCTYPE html>
+<html lang="{{ localePicker.activeLocale }}">
+{% partial 'template/head' %}
+<body class="layout-home page-{{ this.page.id }}">
+{% partial 'template/header' %}
+<div class="parallax">
+    <div class="parallax__first"></div>
+    <div class="parallax__second"></div>
+</div>
+<div class="block-home-head">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-left">
+                <h1>{{ page.title }}</h1>
+
+                <div class="buttons">
+                    <div class="float-lg-left mr-3">
+                        {{ 'Pour les pros'|_ }}<br>
+                        <a href="{{ 'shop-league5'|page }}" class="btn btn-primary">League 5</a>
+                    </div>
+                    <div class="float-lg-left">
+                        {{ 'Pour tous'|_ }}<br>
+                        <a href="{{ 'shop-club5'|page }}" class="btn btn-secondary">Club 5</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-right">
+                <div class="content">
+                    {{ head_text|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% partial 'category-slideshow-league5' image='left' %}
+
+{% partial 'category-slideshow-club5' image='right' %}
+
+<div class="block-about">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-8">
+                <div class="content font-size-big3">
+                    <div class="pretitle-lined white">Goldtest</div>
+                    <h2 class="h1">{{ about_title }}</h2>
+
+                    {{ about_content|raw }}
+
+                    <a href="{{ about_link_url|staticPage }}" class="btn btn-secondary">{{ about_link_name }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% page %}
+{% partial 'template/footer' %}
+{% partial 'template/scripts' %}
+
+{% if about_background_image or about_background_color %}
+    <style>
+        {%  if about_background_image %}
+        .block-about {
+            background-image: url({{ about_background_image|media }});
+        }
+
+        {% endif %}
+
+        {% if about_background_color %}
+        .block-about {
+            background-color: {{ about_background_color }};
+        }
+
+        {% endif %}
+    </style>
+{% endif %}
+</body>
+</html>
+
+{variable name="head_text" type="richeditor" span="full" label="Intro" tab="Introduction"}{/variable}
+
+{variable name="about_title" type="text" span="full" label="Titre" tab="Goldtest"}{/variable}
+{variable name="about_content" type="richeditor"  span="full" label="Contenu" tab="Goldtest"}{/variable}
+{variable name="about_link_name" type="text" span="left" label="Texte du bouton" tab="Goldtest"}{/variable}
+{variable name="about_background_image" type="mediafinder" mode="image" imageWidth="200" span="right" label="Image de fond" tab="Goldtest"}{/variable}
+{variable name="about_link_url"  type="staticpagepicker" emptyOption="-" span="left" label="Page cible du bouton" tab="Goldtest"}{/variable}
+{variable name="about_background_color" type="text" span="right" label="Couleur de fond" comment="fond rouge par défaut" tab="Goldtest"}{/variable}
+
+{variable type="section" span="full" label="Accroche produit - League 5" tab="Accroche produit"}{/variable}
+{variable name="shop_league5_title" type="text" span="full" label="Titre" tab="Accroche produit"}{/variable}
+{variable name="shop_league5_content" type="richeditor" span="full" label="Contenu" tab="Accroche produit"}{/variable}
+{variable name="shop_league5_link_name" type="text" span="left" label="Texte du bouton" tab="Accroche produit"}{/variable}
+{variable name="shop_league5_link_url"  type="text" span="right" label="Page cible du bouton" tab="Accroche produit"}{/variable}
+{repeater name="shop_league5_blocks" tab="Accroche produit" label="Images"}
+{variable name="img_product"    type="mediafinder" mode="image" imageWidth="100" span="left" label="Produit" }{/variable}
+{variable name="img_background" type="mediafinder" mode="image" imageWidth="200" span="right" label="Situation"}{/variable}
+{/repeater}
+
+{variable type="section" span="full" label="Accroche produit - Club 5" tab="Accroche produit"}{/variable}
+{variable name="shop_club5_title" type="text" span="full" label="Titre" tab="Accroche produit"}{/variable}
+{variable name="shop_club5_content" type="richeditor" span="full" label="Contenu" tab="Accroche produit"}{/variable}
+{variable name="shop_club5_link_name" type="text" span="left" label="Texte du bouton" tab="Accroche produit"}{/variable}
+{variable name="shop_club5_link_url"  type="text" span="right" label="Page cible du bouton" tab="Accroche produit"}{/variable}
+{repeater name="shop_club5_blocks" tab="Accroche produit" label="Images"}
+{variable name="img_product"    type="mediafinder" mode="image" imageWidth="100" span="left" label="Produit" }{/variable}
+{variable name="img_background" type="mediafinder" mode="image" imageWidth="200" span="right" label="Situation"}{/variable}
+{/repeater}

@@ -1,0 +1,17 @@
+description = "Default layout"
+
+[session]
+
+[localePicker]
+forceUrl = 1
+==
+<!DOCTYPE html>
+<html lang="{{ localePicker.activeLocale }}">
+{% partial 'template/head' %}
+<body class="layout-default page-{{ this.page.id }}">
+{% partial 'template/header' %}
+{% page %}
+{% partial 'template/footer' %}
+{% partial 'template/scripts' %}
+</body>
+</html>

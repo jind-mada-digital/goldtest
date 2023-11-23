@@ -1,0 +1,22 @@
+.card {
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.card-header {
+    background: none;
+    border-bottom: none;
+    padding: 30px;
+
+    h1, .h1, h2, .h2 {
+        font-size: 40px;
+        line-height: 48px;
+        margin-bottom: 0;
+    }
+}
+
+
+.card-body {
+    padding: 30px;
+}

@@ -1,0 +1,17 @@
+<p>
+    {{ 'Mot de passe perdu ? Aucun problème! Entrez votre adresse email pour valider votre compte.'|_ }}
+</p>
+
+<form data-request="{{ __SELF__ }}::onRestorePassword"
+      data-request-update="'{{ __SELF__ }}::reset': '#partialUserResetForm'"
+      data-request-validate
+      data-request-flash>
+    {{ form_token() }}
+
+    <div class="form-group">
+        <label for="userRestoreEmail">{{ 'Email'|_ }}</label>
+        <input name="email" type="email" class="form-control" id="userRestoreEmail">
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ 'Réinitialiser le mot de passe'|_ }}</button>
+</form>

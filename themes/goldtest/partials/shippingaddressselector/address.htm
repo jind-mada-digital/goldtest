@@ -1,0 +1,22 @@
+<div class="mall-address">
+    <p>
+        {% if address.company %}
+            {{ address.company }}<br/>
+        {% endif %}
+        {{ address.name }}<br/>
+        {{ address.lines }} <br/>
+        {{ address.zip }} {{ address.city }}<br/>
+        {% if address.state_id and address.country.code != 'CH' %}
+            {{ address.state.name }} <br/>
+        {% endif %}
+        {{ address.country.name }}
+    </p>
+
+    {% if not address.goldtest_is_school_address %}
+        <p class="mall-address__actions">
+            <a href="javascript:;" class="js-change-address btn btn-light" data-type="{{ __SELF__.type }}">
+                {{ 'Modifier'|_ }}
+            </a>
+        </p>
+    {% endif %}
+</div>

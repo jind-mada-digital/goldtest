@@ -1,0 +1,25 @@
+<form data-request="onSignin" data-request-validate data-request-flash>
+    <div class="form-group">
+        <label for="signin_email">{{ 'Email'|_ }}</label>
+        <input id="signin_email" name="login" type="text"
+               placeholder="email@example.com" class="form-control">
+        <div data-validate-for="login"></div>
+    </div>
+
+    <div class="form-group">
+        <label for="signin_password">{{ 'Mot de passe'|_ }}</label>
+        <input id="signin_password" type="password" name="password"
+               placeholder="••••••••••••" class="form-control">
+        <div data-validate-for="password"></div>
+    </div>
+
+    <div class="form-group buttons-form-group">
+        <button class="btn btn-primary" type="submit">
+            {{ 'Login'|_ }}
+        </button>
+
+        <a class="forget-password-button" href="{{ 'reset-password' | page }}">
+            {{ 'Mot de passe perdu ?'|_ }}
+        </a>
+    </div>
+</form>

@@ -1,0 +1,34 @@
+1698662719a:1:{s:21:"cart/table/header.htm";a:5:{s:8:"fileName";s:21:"cart/table/header.htm";s:7:"content";s:443:"<tr class="mall-cart__header">
+    <th colspan="2">
+        <span class="h4">{{ 'Produit(s)'|_ }}</span>
+    </th>
+    <th>
+        <span class="h4">{{ 'Taille'|_ }}</span>
+    </th>
+    <th class="h4" width="200">
+        {{ 'Quantité(s)'|_ }}
+    </th>
+    <th class="text-right">
+        <span class="h4 pr-4">{{ 'Prix'|_ }}</span>
+    </th>
+    <th class="text-right h4">
+        <span class="pr-2">{{ 'Total'|_ }}</span>
+    </th>
+</tr>
+";s:5:"mtime";i:1573828520;s:6:"markup";s:442:"<tr class="mall-cart__header">
+    <th colspan="2">
+        <span class="h4">{{ 'Produit(s)'|_ }}</span>
+    </th>
+    <th>
+        <span class="h4">{{ 'Taille'|_ }}</span>
+    </th>
+    <th class="h4" width="200">
+        {{ 'Quantité(s)'|_ }}
+    </th>
+    <th class="text-right">
+        <span class="h4 pr-4">{{ 'Prix'|_ }}</span>
+    </th>
+    <th class="text-right h4">
+        <span class="pr-2">{{ 'Total'|_ }}</span>
+    </th>
+</tr>";s:4:"code";N;}}

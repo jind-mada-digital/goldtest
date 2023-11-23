@@ -1,0 +1,126 @@
+1698666280a:1:{s:26:"template/header-search.htm";a:6:{s:8:"fileName";s:26:"template/header-search.htm";s:7:"content";s:1482:"[viewBag]
+==
+<form class="header-search-form hidden-sm" action="{{ 'search'|page }}?q={{ query | url_encode(true) }}" method="get">
+    <div class="ss-search-form">
+        <div class="ss-search-form__input">
+            <input name="q" type="text" placeholder="{{ 'goldtest.mall::lang.label.search' | trans }}"
+                   value="{{ searchInput.query }}"
+                   autocomplete="off"
+                   autofocus
+            >
+            <button type="submit" class="search-button">
+              <img src="{{ 'assets/images/icons/search.svg'|theme }}" alt="{{ 'goldtest.mall::lang.label.search' | trans }}" width="16">
+            </button>
+        </div>
+    </div>
+</form>
+
+<style>
+.header-search-form {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 0.5rem;
+}
+
+.header-search-form .search-button {
+    position: absolute;
+    left: 0px;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    outline: none !important;
+    cursor: pointer;
+}
+
+.header-search-form input {
+    border: 0;
+    font-size: 16px;
+    appearance: none;
+    outline: none;
+    padding-left: 25px;
+    background: transparent;
+    border-bottom: 2px solid #7b7b7b;
+}
+
+.menu-search {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    .menu-search {
+        display: block;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .header-search-form {
+        display: none;
+    }
+}
+</style>
+";s:5:"mtime";i:1606468598;s:6:"markup";s:1468:"<form class="header-search-form hidden-sm" action="{{ 'search'|page }}?q={{ query | url_encode(true) }}" method="get">
+    <div class="ss-search-form">
+        <div class="ss-search-form__input">
+            <input name="q" type="text" placeholder="{{ 'goldtest.mall::lang.label.search' | trans }}"
+                   value="{{ searchInput.query }}"
+                   autocomplete="off"
+                   autofocus
+            >
+            <button type="submit" class="search-button">
+              <img src="{{ 'assets/images/icons/search.svg'|theme }}" alt="{{ 'goldtest.mall::lang.label.search' | trans }}" width="16">
+            </button>
+        </div>
+    </div>
+</form>
+
+<style>
+.header-search-form {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 0.5rem;
+}
+
+.header-search-form .search-button {
+    position: absolute;
+    left: 0px;
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    outline: none !important;
+    cursor: pointer;
+}
+
+.header-search-form input {
+    border: 0;
+    font-size: 16px;
+    appearance: none;
+    outline: none;
+    padding-left: 25px;
+    background: transparent;
+    border-bottom: 2px solid #7b7b7b;
+}
+
+.menu-search {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    .menu-search {
+        display: block;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .header-search-form {
+        display: none;
+    }
+}
+</style>";s:4:"code";N;s:7:"viewBag";a:0:{}}}

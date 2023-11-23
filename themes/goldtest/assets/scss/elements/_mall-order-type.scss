@@ -1,0 +1,29 @@
+.mall-order-type {
+    &__entry {
+        display: flex;
+        position: relative;
+        z-index: 0;
+        border: 1px solid $light-grey;
+        padding: 60px 20px 60px 30px;
+        color: $grey;
+
+        &--active {
+            border: 3px solid $black;
+            color: $dark-grey;
+        }
+
+        &:nth-child(even):not(&--active) {
+            background: $table-accent-bg;
+        }
+    }
+
+    &__text {
+        flex: 1 1 0%;
+        font-weight: bold;
+    }
+
+    &__actions {
+        width: 30%;
+        text-align: right;
+    }
+}

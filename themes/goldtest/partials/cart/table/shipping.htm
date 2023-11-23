@@ -1,0 +1,12 @@
+{% if __SELF__.showShipping %}
+    <tr class="mall-cart__shipping">
+        <td colspan="5">
+            + {{ 'Frais de livraison'|_ }}
+        </td>
+        <td class="text-right">
+            {{ shipping.totalPostTaxes | money }}
+        </td>
+    </tr>
+{% else %}
+    {% partial __SELF__ ~ '::shippingexcluded' %}
+{% endif %}

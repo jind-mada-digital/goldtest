@@ -1,0 +1,69 @@
+.mall-filter__option {
+    display: block;
+    float: left;
+    margin: 0 15px 10px 0;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 13px;
+    color: $grey;
+    border: 3px solid $light-grey;
+    background: $light-grey;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.mall-filter__option-color {
+    margin-right: 0;
+}
+
+.mall-filter__option-color {
+    border-radius: 50%;
+    padding: 9px;
+    background: $white;
+    border-color: $white;
+
+    span {
+        width: 25px;
+        height: 25px;
+        display: block;
+        border-radius: 50%;
+    }
+
+    &.color-rouge span {
+        background: $primary-red;
+    }
+
+    &.color-gris span {
+        background: $dark-grey;
+    }
+
+    &.color-violet span {
+        background: #6163CD;
+    }
+}
+
+.mall-filter__option--selected {
+    background: $white;
+    color: $dark-grey;
+    border-color: $dark-grey;
+}
+
+.mall-loader {
+    display: flex;
+    justify-content: center;
+
+    background: hsla(0, 0%, 100%, .8);
+    z-index: 10000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    cursor: wait;
+    -ms-flex-align: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    min-height: 400px;
+}
+

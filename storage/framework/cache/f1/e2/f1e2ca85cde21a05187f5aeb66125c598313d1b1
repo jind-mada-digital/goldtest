@@ -1,0 +1,52 @@
+1698665476a:1:{s:18:"signup/default.htm";a:5:{s:8:"fileName";s:18:"signup/default.htm";s:7:"content";s:827:"<div class="container mall-signup">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mall-signup__signin">
+                <div class="card-header">
+                    <h1>{{ 'Login'|_ }}</h1>
+                </div>
+                <div class="card-body">
+                    {% partial __SELF__ ~ '::signin' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mall-signup__signup mall-signup-form">
+                <div class="card-header">
+                    <h1>{{ 'Inscription'|_ }}</h1>
+                </div>
+                <div class="card-body">
+                    {% partial __SELF__ ~ '::signup' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial __SELF__ ~ '::scripts' %}
+";s:5:"mtime";i:1573829746;s:6:"markup";s:826:"<div class="container mall-signup">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mall-signup__signin">
+                <div class="card-header">
+                    <h1>{{ 'Login'|_ }}</h1>
+                </div>
+                <div class="card-body">
+                    {% partial __SELF__ ~ '::signin' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mall-signup__signup mall-signup-form">
+                <div class="card-header">
+                    <h1>{{ 'Inscription'|_ }}</h1>
+                </div>
+                <div class="card-body">
+                    {% partial __SELF__ ~ '::signup' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial __SELF__ ~ '::scripts' %}";s:4:"code";N;}}

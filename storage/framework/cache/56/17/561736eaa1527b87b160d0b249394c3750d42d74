@@ -1,0 +1,27 @@
+1698653916a:1:{s:26:"checkout/steps/confirm.htm";a:5:{s:8:"fileName";s:26:"checkout/steps/confirm.htm";s:7:"content";s:301:"<div class="block-simple-head">
+    <h1>{{ 'Récapitulatif'|_ }}</h1>
+</div>
+
+{% partial __SELF__ ~ '::summary' %}
+
+{% component 'cart' %}
+
+{% partial __SELF__ ~ '::confirminfo' %}
+{% partial __SELF__ ~ '::actions' %}
+
+{% if __SELF__.dataLayer %}
+    {% partial __SELF__ ~ '::datalayer' %}
+{% endif %}";s:5:"mtime";i:1574087914;s:6:"markup";s:301:"<div class="block-simple-head">
+    <h1>{{ 'Récapitulatif'|_ }}</h1>
+</div>
+
+{% partial __SELF__ ~ '::summary' %}
+
+{% component 'cart' %}
+
+{% partial __SELF__ ~ '::confirminfo' %}
+{% partial __SELF__ ~ '::actions' %}
+
+{% if __SELF__.dataLayer %}
+    {% partial __SELF__ ~ '::datalayer' %}
+{% endif %}";s:4:"code";N;}}

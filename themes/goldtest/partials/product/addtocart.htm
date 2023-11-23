@@ -1,0 +1,35 @@
+{% if not item.allow_out_of_stock_purchases and stock < 1 %}
+    <div class="mall-product__property-stock text-red">
+        {{ 'offline.mall::frontend.stock.unavailable' | trans }}
+    </div>
+{% endif %}
+
+{% if stock > 0 or item.allow_out_of_stock_purchases %}
+    <div class="mall-product__add-to-cart-form">
+        <div class="mall-product__property mall-product__quantity">
+            <label for="quantity" class="property-title">{{ 'Quantité'|_ }}</label>
+
+            <button class="btn-quantity less" {{ item.quantity_default | default(1) < 2 ? 'disabled' }}></button>
+
+            <input type="number" id="quantity" name="quantity"
+                   min="{{ item.quantity_min }}" max="{{ item.quantity_max }}"
+                   value="{{ item.quantity_default | default(1) }}">
+
+            <button class="btn-quantity more"></button>
+
+            <div class="clearfix"></div>
+
+            <div data-validate-for="quantity"></div>
+        </div>
+
+        {% if stock < 1 %}
+            <div class="mall-product__quantity--not-in-stock text-red">
+                {{ 'Les délais de livraison pour ce produit peuvent être plus long'|_ }}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary mall-add-to-cart-button" data-attach-loading>
+            {{ 'offline.mall::frontend.cart.add' | trans }}
+        </button>
+    </div>
+{% endif %}

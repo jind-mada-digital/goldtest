@@ -1,0 +1,12 @@
+title = "Product"
+url = "/product/:slug/:variant?"
+layout = "default"
+is_hidden = 0
+
+[goldtestProduct product]
+product = ":slug"
+variant = ":slug"
+redirectOnPropertyChange = 1
+currentVariantReviewsOnly = 0
+==
+{% component 'product' %}

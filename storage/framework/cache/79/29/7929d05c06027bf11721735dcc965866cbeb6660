@@ -1,0 +1,28 @@
+1698665476a:1:{s:17:"product/price.htm";a:5:{s:8:"fileName";s:17:"product/price.htm";s:7:"content";s:441:"{% set price = price|default(item.price()) %}
+
+{% if price.official or item.oldPrice().integer %}
+    <div class="mall-product__old-price">
+        {% if price.official %}
+            {{ price.official.string | raw }}
+        {% else %}
+            {{ item.oldPrice().string | raw }}
+        {% endif %}
+    </div>
+{% endif %}
+<div class="mall-product__current-price">
+    {% partial __SELF__ ~ '::currentprice' price=price.string %}
+</div>
+";s:5:"mtime";i:1573643508;s:6:"markup";s:440:"{% set price = price|default(item.price()) %}
+
+{% if price.official or item.oldPrice().integer %}
+    <div class="mall-product__old-price">
+        {% if price.official %}
+            {{ price.official.string | raw }}
+        {% else %}
+            {{ item.oldPrice().string | raw }}
+        {% endif %}
+    </div>
+{% endif %}
+<div class="mall-product__current-price">
+    {% partial __SELF__ ~ '::currentprice' price=price.string %}
+</div>";s:4:"code";N;}}

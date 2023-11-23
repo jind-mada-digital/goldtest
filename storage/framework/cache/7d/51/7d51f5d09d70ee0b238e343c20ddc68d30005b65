@@ -1,0 +1,105 @@
+1698666280a:1:{s:16:"popup-banner.htm";a:5:{s:8:"fileName";s:16:"popup-banner.htm";s:7:"content";s:1585:"<!--
+<div class="control-popup modal fade" id="bs-modal" tabindex="-1" role="dialog">
+    <div
+        class="modal-dialog modal-dialog-centered"
+        style="max-width: max-content; margin: 0 auto"
+    >
+        <div class="modal-content">
+            <button
+                id="offerBtn"
+                style="margin-left: 0"
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-hidden="true"
+            >
+                &times;
+            </button>
+            <a
+                href="https://www.goldtest.ch/fr/club5"
+            >
+                <img
+                    src="/storage/app/media/pop-ups/pop-up-Triple-Up-2023_janvier-mars.png"
+                    style="width: 70vw; height: auto"
+                />
+            </a>
+        </div>
+    </div>
+    <style>
+        #offerBtn:hover,
+        #offerBtn {
+            position: absolute;
+            color: white;
+            right: -34px;
+            top: -9px;
+            opacity: 1;
+            padding: 1px 11px;
+            text-shadow: none;
+        }
+    </style>
+    {% put scripts %}
+    <script>
+        $(function () {
+            const productModal = sessionStorage.getItem("product_modal");
+            if (!productModal || window.location.hash == "#p") {
+                // if (window.location.hash == "#p") {
+                sessionStorage.setItem("product_modal", "1");
+                $("#bs-modal").modal();
+            }
+        });
+    </script>
+    {% endput %}
+</div>
+-->";s:5:"mtime";i:1681456185;s:6:"markup";s:1585:"<!--
+<div class="control-popup modal fade" id="bs-modal" tabindex="-1" role="dialog">
+    <div
+        class="modal-dialog modal-dialog-centered"
+        style="max-width: max-content; margin: 0 auto"
+    >
+        <div class="modal-content">
+            <button
+                id="offerBtn"
+                style="margin-left: 0"
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-hidden="true"
+            >
+                &times;
+            </button>
+            <a
+                href="https://www.goldtest.ch/fr/club5"
+            >
+                <img
+                    src="/storage/app/media/pop-ups/pop-up-Triple-Up-2023_janvier-mars.png"
+                    style="width: 70vw; height: auto"
+                />
+            </a>
+        </div>
+    </div>
+    <style>
+        #offerBtn:hover,
+        #offerBtn {
+            position: absolute;
+            color: white;
+            right: -34px;
+            top: -9px;
+            opacity: 1;
+            padding: 1px 11px;
+            text-shadow: none;
+        }
+    </style>
+    {% put scripts %}
+    <script>
+        $(function () {
+            const productModal = sessionStorage.getItem("product_modal");
+            if (!productModal || window.location.hash == "#p") {
+                // if (window.location.hash == "#p") {
+                sessionStorage.setItem("product_modal", "1");
+                $("#bs-modal").modal();
+            }
+        });
+    </script>
+    {% endput %}
+</div>
+-->";s:4:"code";N;}}

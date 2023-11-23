@@ -1,0 +1,93 @@
+1698665476a:1:{s:22:"productsfilter/set.htm";a:6:{s:8:"fileName";s:22:"productsfilter/set.htm";s:7:"content";s:1746:"[viewBag]
+==
+<div class="mall-filter mall-filter--set">
+    {% set selected = filter[property.slug].values %}
+
+    <div class="js-mall-filter mall-filter__select-all-option mall-filter__option {{ selected is null ? 'mall-filter__option--selected' : '' }}">
+        <input type="checkbox"
+               aria-hidden="true"
+               style="display: none"
+               name="filter[{{ property.slug }}][]"
+               value=""
+                {{ selected is null ? 'checked' }} >
+        {{ 'Tous'|_ }}
+    </div>
+
+    {% for value in values %}
+        {% set isSelected = value.index_value in selected %}
+        {% set isColor = property.slug == 'couleurs' %}
+        {% set cssClasses = isSelected ? 'mall-filter__option--selected' : '' %}
+
+        {% if isColor %}
+            {% set cssClasses = cssClasses ~ ' mall-filter__option-color' %}
+
+            {% set hexaColor = '' %}
+
+            {% for option in property.options if option.value == value.value  %}
+                {% set hexaColor = option.color %}
+            {% endfor %}
+        {% endif %}
+
+        {% if value.display_value != "Sous-couches"%}
+        <div class="js-mall-filter mall-filter__option {{ cssClasses }}">
+            <input type="checkbox"
+                   aria-hidden="true"
+                   style="display: none"
+                   name="filter[{{ property.slug }}][]"
+                   value="{{ value.index_value }}"
+                    {{ isSelected ? 'checked' }} >
+
+            {% if isColor %}
+                <span style="background-color: {{ hexaColor }}"></span>
+            {% else %}
+                {{ value.display_value|_ }} {{ property.unit }}
+            {% endif %}
+        </div>
+            {% endif %}
+    {% endfor %}
+</div>";s:5:"mtime";i:1671704269;s:6:"markup";s:1733:"<div class="mall-filter mall-filter--set">
+    {% set selected = filter[property.slug].values %}
+
+    <div class="js-mall-filter mall-filter__select-all-option mall-filter__option {{ selected is null ? 'mall-filter__option--selected' : '' }}">
+        <input type="checkbox"
+               aria-hidden="true"
+               style="display: none"
+               name="filter[{{ property.slug }}][]"
+               value=""
+                {{ selected is null ? 'checked' }} >
+        {{ 'Tous'|_ }}
+    </div>
+
+    {% for value in values %}
+        {% set isSelected = value.index_value in selected %}
+        {% set isColor = property.slug == 'couleurs' %}
+        {% set cssClasses = isSelected ? 'mall-filter__option--selected' : '' %}
+
+        {% if isColor %}
+            {% set cssClasses = cssClasses ~ ' mall-filter__option-color' %}
+
+            {% set hexaColor = '' %}
+
+            {% for option in property.options if option.value == value.value  %}
+                {% set hexaColor = option.color %}
+            {% endfor %}
+        {% endif %}
+
+        {% if value.display_value != "Sous-couches"%}
+        <div class="js-mall-filter mall-filter__option {{ cssClasses }}">
+            <input type="checkbox"
+                   aria-hidden="true"
+                   style="display: none"
+                   name="filter[{{ property.slug }}][]"
+                   value="{{ value.index_value }}"
+                    {{ isSelected ? 'checked' }} >
+
+            {% if isColor %}
+                <span style="background-color: {{ hexaColor }}"></span>
+            {% else %}
+                {{ value.display_value|_ }} {{ property.unit }}
+            {% endif %}
+        </div>
+            {% endif %}
+    {% endfor %}
+</div>";s:4:"code";N;s:7:"viewBag";a:0:{}}}

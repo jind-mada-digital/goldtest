@@ -1,0 +1,397 @@
+1698666280a:1:{s:19:"template/header.htm";a:8:{s:8:"fileName";s:19:"template/header.htm";s:7:"content";s:8167:"[viewBag]
+
+[staticMenu mainMenu]
+code = "main"
+
+[cart]
+showDiscountApplier = 1
+showTaxes = 1
+showShipping = 1
+==
+<style>
+  @media (max-width: 767.98px) {
+    .select-language {
+        visibility: visible;
+    }
+	.language-area {
+        visibility: hidden;
+    }
+}
+
+@media (min-width: 767.98px) {
+    .language-area {
+        visibility : visible;
+    }
+	.select-language {
+        visibility: hidden;
+    }
+}
+</style>
+<header id="header">
+  <div class="header-top container-fluid" style="box-sizing:content-box;">
+        {% set cartProductsCount = cart.cart.products.count %}
+
+        {% partial 'template/header-search' %}
+
+        <a href="{{ 'cart' | page }}" class="mr-3">
+            <img src="{{ 'assets/images/icons/cart_20.svg'|theme }}" alt="{{ 'Panier'|_ }}" width="20">
+
+            <span class="mall-cart-count {{ cartProductsCount < 1 ? 'd-none' }}">
+                {{ cartProductsCount }}
+            </span>
+        </a>
+
+
+        {% if user %}
+            <a href="{{ 'myaccount'|page }}" class="mr-3">
+                <img src="{{ 'assets/images/icons/member_20.svg'|theme }}" alt="" class="mr-1">
+                {{ 'Mon compte'|_ }}
+            </a>
+        {% else %}
+	  <a href="{{ 'login'|page }}" class="mr-3">
+                <img src="{{ 'assets/images/icons/member_20.svg'|theme }}" alt="" class="mr-1">
+                {{ 'Login ou Inscription'|_ }}
+            </a>
+        {% endif %}
+	  <select class="mt-2 select-language" onchange ="window.location.assign(this.value)" style="font-size:0.8rem;">
+		<option value="/fr" {{ localePicker.activeLocale == 'fr' ? 'selected' }}>FR</option>
+		<option value="/de" {{ localePicker.activeLocale == 'de' ? 'selected' }}>DE</option>
+		<option value="/it" {{ localePicker.activeLocale == 'it' ? 'selected' }}>IT</option>
+		<option value="/en" {{ localePicker.activeLocale == 'en' ? 'selected' }}>EN</option>		
+	  </select>
+	  <span class="language-area">
+	  <button data-request="onSwitchLocale" data-request-data="locale: 'fr'"
+                class="btn btn-link {{ localePicker.activeLocale == 'fr' ? 'active' }}">FR
+        </button>
+
+        |
+
+        <button data-request="onSwitchLocale" data-request-data="locale: 'de'"
+                class="btn btn-link {{ localePicker.activeLocale == 'de' ? 'active' }}">DE
+        </button>
+	    |
+
+        <button data-request="onSwitchLocale" data-request-data="locale: 'it'"
+                class="btn btn-link {{ localePicker.activeLocale == 'it' ? 'active' }}">IT
+        </button>
+	    |
+
+        <button data-request="onSwitchLocale" data-request-data="locale: 'en'"
+                class="btn btn-link {{ localePicker.activeLocale == 'en' ? 'active' }}">EN
+	  </button>
+	  </span>
+    </div>
+    <div class="header-main">
+        <div class="container-fluid h-100">
+            <div class="d-flex h-100 flex-row align-items-center">
+                <a href="/" class="logo mr-auto" accesskey="0">
+                    <img src="{{ 'assets/images/logos/goldtest-logo.svg'|theme }}" alt="" title="Goldtest"
+                         class="logo-normal">
+                    <img src="{{ 'assets/images/logos/goldtest-logo-text.svg'|theme }}" alt="" title="Goldtest"
+                         class="logo-scrolled">
+                </a>
+
+                
+
+                {# {% if product %} #}
+                {# {% if this.page.id == "cart" %}
+                    <a href="{{ (product.product.inProCategory ? 'shop-league5':'shop-club5')|page }}"
+                       class="btn btn-light back-to-shop" style="margin-right:1rem;">
+                       <img src="https://goldtest.ch/themes/goldtest/assets/images/icons/arrow_left_20.svg" alt="" style="margin-right: 0.5rem;">
+                        {{ 'Retour au shop'|_ }}
+                    </a>
+                {% endif %} #}
+                
+                {% if product %}
+                    <a href="{{ (product.product.inProCategory ? 'shop-league5':'shop-club5')|page }}"
+                       class="back-to-shop">
+                        {{ 'Retour au shop'|_ }}
+                    </a>
+                {% endif %}
+
+                <button class="navbar-toggler" type="button" data-toggle="modal"
+                        data-target="#menu" aria-controls="menu"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="menu" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button class="menu-close" type="button" data-dismiss="modal">
+            </button>
+            <form class="menu-search" action="{{ 'search'|page }}?q={{ query | url_encode(true) }}" method="get">
+                <div class="ss-search-form__input" style="display: flex;align-items: center;padding: 1rem;">
+                    <input class="form-control" style="padding: 2rem;" name="q" type="text" placeholder="{{ 'Rechercher un produit'|_}}"
+                           value="{{ searchInput.query }}"
+                           autocomplete="off"
+                           autofocus
+                    >
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+            <ul>
+                <li>
+                    <a href="{{ 'shop-league5'|page }}">
+                        <div class="pretitle-lined">{{ 'Pour les pros'|_ }}</div>
+                        <span class="h2 d-block">League5</span>
+                        <span class="h5 d-block">Shop</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ 'shop-club5'|page }}">
+                        <div class="pretitle-lined">{{ 'Pour tous'|_ }}</div>
+                        <span class="h2 d-block">Club5</span>
+                        <span class="h5 d-block">Shop</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ 'about'|staticPage }}">
+                        <div class="pretitle-lined">Goldtest</div>
+                        <span class="h2 d-block">About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://easyskischool.goldtest.com/" target="_blank">
+                        <span class="h5 d-block">
+                            <img src="{{ 'assets/images/icons/arrow_right_20.svg'|theme }}" alt="">
+                            Easy ski school
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://boutique.goldtest.com/" target="_blank">
+                        <span class="h5 d-block">
+                            <img src="{{ 'assets/images/icons/arrow_right_20.svg'|theme }}" alt="">
+                            Outlet
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://ebikeshoptorgon.ch/" target="_blank">
+                        <span class="h5 d-block">
+                            <img src="{{ 'assets/images/icons/arrow_right_20.svg'|theme }}" alt="">
+                            EBIKE SHOP TORGON
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% put scripts %}
+    <script>
+        $(function () {
+            var baseCount = '{{ cartProductsCount }}';
+            var $count = $('.mall-cart-count');
+
+            $.subscribe('mall.cart.productAdded', function () {
+                $count.removeClass('d-none').text(++baseCount).show();
+            });
+
+            $.subscribe('mall.cart.productRemoved', function () {
+                baseCount--;
+                if (baseCount < 0) baseCount = 0;
+                $count.text(baseCount);
+            });
+        });
+    </script>
+{% endput %}";s:5:"mtime";i:1671698530;s:6:"markup";s:8044:"<style>
+  @media (max-width: 767.98px) {
+    .select-language {
+        visibility: visible;
+    }
+	.language-area {
+        visibility: hidden;
+    }
+}
+
+@media (min-width: 767.98px) {
+    .language-area {
+        visibility : visible;
+    }
+	.select-language {
+        visibility: hidden;
+    }
+}
+</style>
+<header id="header">
+  <div class="header-top container-fluid" style="box-sizing:content-box;">
+        {% set cartProductsCount = cart.cart.products.count %}
+
+        {% partial 'template/header-search' %}
+
+        <a href="{{ 'cart' | page }}" class="mr-3">
+            <img src="{{ 'assets/images/icons/cart_20.svg'|theme }}" alt="{{ 'Panier'|_ }}" width="20">
+
+            <span class="mall-cart-count {{ cartProductsCount < 1 ? 'd-none' }}">
+                {{ cartProductsCount }}
+            </span>
+        </a>
+
+
+        {% if user %}
+            <a href="{{ 'myaccount'|page }}" class="mr-3">
+                <img src="{{ 'assets/images/icons/member_20.svg'|theme }}" alt="" class="mr-1">
+                {{ 'Mon compte'|_ }}
+            </a>
+        {% else %}
+	  <a href="{{ 'login'|page }}" class="mr-3">
+                <img src="{{ 'assets/images/icons/member_20.svg'|theme }}" alt="" class="mr-1">
+                {{ 'Login ou Inscription'|_ }}
+            </a>
+        {% endif %}
+	  <select class="mt-2 select-language" onchange ="window.location.assign(this.value)" style="font-size:0.8rem;">
+		<option value="/fr" {{ localePicker.activeLocale == 'fr' ? 'selected' }}>FR</option>
+		<option value="/de" {{ localePicker.activeLocale == 'de' ? 'selected' }}>DE</option>
+		<option value="/it" {{ localePicker.activeLocale == 'it' ? 'selected' }}>IT</option>
+		<option value="/en" {{ localePicker.activeLocale == 'en' ? 'selected' }}>EN</option>		
+	  </select>
+	  <span class="language-area">
+	  <button data-request="onSwitchLocale" data-request-data="locale: 'fr'"
+                class="btn btn-link {{ localePicker.activeLocale == 'fr' ? 'active' }}">FR
+        </button>
+
+        |
+
+        <button data-request="onSwitchLocale" data-request-data="locale: 'de'"
+                class="btn btn-link {{ localePicker.activeLocale == 'de' ? 'active' }}">DE
+        </button>
+	    |
+
+        <button data-request="onSwitchLocale" data-request-data="locale: 'it'"
+                class="btn btn-link {{ localePicker.activeLocale == 'it' ? 'active' }}">IT
+        </button>
+	    |
+
+        <button data-request="onSwitchLocale" data-request-data="locale: 'en'"
+                class="btn btn-link {{ localePicker.activeLocale == 'en' ? 'active' }}">EN
+	  </button>
+	  </span>
+    </div>
+    <div class="header-main">
+        <div class="container-fluid h-100">
+            <div class="d-flex h-100 flex-row align-items-center">
+                <a href="/" class="logo mr-auto" accesskey="0">
+                    <img src="{{ 'assets/images/logos/goldtest-logo.svg'|theme }}" alt="" title="Goldtest"
+                         class="logo-normal">
+                    <img src="{{ 'assets/images/logos/goldtest-logo-text.svg'|theme }}" alt="" title="Goldtest"
+                         class="logo-scrolled">
+                </a>
+
+                
+
+                {# {% if product %} #}
+                {# {% if this.page.id == "cart" %}
+                    <a href="{{ (product.product.inProCategory ? 'shop-league5':'shop-club5')|page }}"
+                       class="btn btn-light back-to-shop" style="margin-right:1rem;">
+                       <img src="https://goldtest.ch/themes/goldtest/assets/images/icons/arrow_left_20.svg" alt="" style="margin-right: 0.5rem;">
+                        {{ 'Retour au shop'|_ }}
+                    </a>
+                {% endif %} #}
+                
+                {% if product %}
+                    <a href="{{ (product.product.inProCategory ? 'shop-league5':'shop-club5')|page }}"
+                       class="back-to-shop">
+                        {{ 'Retour au shop'|_ }}
+                    </a>
+                {% endif %}
+
+                <button class="navbar-toggler" type="button" data-toggle="modal"
+                        data-target="#menu" aria-controls="menu"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="menu" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button class="menu-close" type="button" data-dismiss="modal">
+            </button>
+            <form class="menu-search" action="{{ 'search'|page }}?q={{ query | url_encode(true) }}" method="get">
+                <div class="ss-search-form__input" style="display: flex;align-items: center;padding: 1rem;">
+                    <input class="form-control" style="padding: 2rem;" name="q" type="text" placeholder="{{ 'Rechercher un produit'|_}}"
+                           value="{{ searchInput.query }}"
+                           autocomplete="off"
+                           autofocus
+                    >
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+            <ul>
+                <li>
+                    <a href="{{ 'shop-league5'|page }}">
+                        <div class="pretitle-lined">{{ 'Pour les pros'|_ }}</div>
+                        <span class="h2 d-block">League5</span>
+                        <span class="h5 d-block">Shop</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ 'shop-club5'|page }}">
+                        <div class="pretitle-lined">{{ 'Pour tous'|_ }}</div>
+                        <span class="h2 d-block">Club5</span>
+                        <span class="h5 d-block">Shop</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ 'about'|staticPage }}">
+                        <div class="pretitle-lined">Goldtest</div>
+                        <span class="h2 d-block">About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://easyskischool.goldtest.com/" target="_blank">
+                        <span class="h5 d-block">
+                            <img src="{{ 'assets/images/icons/arrow_right_20.svg'|theme }}" alt="">
+                            Easy ski school
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://boutique.goldtest.com/" target="_blank">
+                        <span class="h5 d-block">
+                            <img src="{{ 'assets/images/icons/arrow_right_20.svg'|theme }}" alt="">
+                            Outlet
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://ebikeshoptorgon.ch/" target="_blank">
+                        <span class="h5 d-block">
+                            <img src="{{ 'assets/images/icons/arrow_right_20.svg'|theme }}" alt="">
+                            EBIKE SHOP TORGON
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% put scripts %}
+    <script>
+        $(function () {
+            var baseCount = '{{ cartProductsCount }}';
+            var $count = $('.mall-cart-count');
+
+            $.subscribe('mall.cart.productAdded', function () {
+                $count.removeClass('d-none').text(++baseCount).show();
+            });
+
+            $.subscribe('mall.cart.productRemoved', function () {
+                baseCount--;
+                if (baseCount < 0) baseCount = 0;
+                $count.text(baseCount);
+            });
+        });
+    </script>
+{% endput %}";s:4:"code";N;s:7:"viewBag";a:0:{}s:19:"staticMenu mainMenu";a:1:{s:4:"code";s:4:"main";}s:4:"cart";a:3:{s:19:"showDiscountApplier";s:1:"1";s:9:"showTaxes";s:1:"1";s:12:"showShipping";s:1:"1";}}}

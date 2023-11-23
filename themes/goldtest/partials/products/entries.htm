@@ -1,0 +1,17 @@
+{% partial __SELF__ ~ '::loader' %}
+
+<div class="container">
+    <div class="mall-products-counter">
+        {{ __SELF__.items.total }} {{ 'produit(s) trouvé(s)'|_ }}
+    </div>
+</div>
+
+{% if __SELF__.items.count %}
+
+    {% partial __SELF__ ~ '::items' items=__SELF__.items %}
+
+{% endif %}
+
+{% if __SELF__.dataLayer %}
+    {% partial __SELF__ ~ '::datalayer' %}
+{% endif %}

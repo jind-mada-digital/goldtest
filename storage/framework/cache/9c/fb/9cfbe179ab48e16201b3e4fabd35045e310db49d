@@ -1,0 +1,307 @@
+1698665476a:1:{s:17:"signup/signup.htm";a:6:{s:8:"fileName";s:17:"signup/signup.htm";s:7:"content";s:6099:"==
+<?php
+function onStart() {
+    $this['schools'] = Goldtest\Site\Models\School::all();
+    $this['schools_titles'] = Goldtest\Site\Models\Settings::get('school_post_titles');
+}
+?>
+==
+<form data-request="onSignup" data-request-validate data-request-flash>
+
+    <div class="form-group">
+        <label for="civilite">{{ 'Civilité'|_ }}</label>
+        <select id="civilite" class="custom-select" name="goldtest_civility">
+            <option value="Madame">{{ 'Madame'|_ }}</option>
+            <option value="Monsieur">{{ 'Monsieur'|_ }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="signup_email">{{ 'Email'|_ }}</label>
+        <input id="signup_email" type="email" placeholder="email@email.com" name="email" class="form-control">
+        <div data-validate-for="email"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="firstname">{{ 'Prénom'|_ }}</label>
+                <input id="firstname" type="text" name="firstname" class="form-control">
+                <div data-validate-for="firstname"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="lastname">{{ 'Nom'|_ }}</label>
+                <input id="lastname" type="text" name="lastname" class="form-control">
+                <div data-validate-for="lastname"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="height">{{ 'Taille (cm)'|_ }}</label>
+                <input id="height" type="text" name="height" class="form-control">
+                <div data-validate-for="height"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="weight">{{ 'Poids (kg)'|_ }}</label>
+                <input id="weight" type="text" name="weight" class="form-control">
+                <div data-validate-for="weight"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="signup_password">{{ 'Mot de passe'|_ }}</label>
+                <input id="signup_password" type="password" name="password" class="form-control">
+                <div data-validate-for="password"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="password_repeat">{{ 'Répéter le mot de passe'|_ }}</label>
+                <input id="password_repeat" type="password" name="password_repeat" class="form-control">
+                <div data-validate-for="password_repeat"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="custom-checkbox">
+            <input type="checkbox" name="goldtest_is_school_member" value="1"
+                   class="custom-control-input js-toggle-school" id="is_school_member">
+            <label class="custom-control-label" for="is_school_member">
+                {{ 'Je travaille pour école de ski'|_ }}
+            </label>
+        </div>
+    </div>
+
+    <div class="school-block" style="display: none">
+        <div class="form-group">
+            <label for="school">{{ 'Ecole/Association/office'|_ }}</label>
+            <select id="school" name="goldtest_school_id" class="custom-select">
+                <option value="">-</option>
+                {% for school in schools %}
+                    <option value="{{ school.id }}">{{ school.name }}</option>
+                {% endfor %}
+            </select>
+            <div data-validate-for="goldtest_school_id"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="goldtest_school_title">{{ 'Titre'|_ }}</label>
+            <select name="goldtest_school_title" id="goldtest_school_title" class="custom-select">
+                {% for title in schools_titles %}
+                    <option value="{{ title.name }}">{{ title.name|_ }}</option>
+                {% endfor %}
+                <option value="CUSTOM">{{ 'Autre'|_ }}</option>
+            </select>
+        </div>
+
+        <div class="form-group school-title-other-block" style="display: none">
+            <label for="goldtest_school_title_other">{{ 'Autre titre (merci de préciser)'|_ }}</label>
+            <input name="goldtest_school_title_other" id="goldtest_school_title_other" type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">{{ 'Numéro de téléphone'|_ }}</label>
+        <input id="phone" type="text" name="goldtest_phone" class="form-control">
+        <div data-validate-for="goldtest_phone"></div>
+    </div>
+
+    <div class="mall-signup__billing-address">
+        <h4 class="mall-signup__subheading">
+            {{ 'Adresse'|_ }}
+        </h4>
+
+        {% partial __SELF__ ~ '::addressform' type='billing' %}
+
+        <div class="mall-signup__shipping-address-option form-group">
+            <div class="custom-checkbox">
+                <input class="custom-control-input js-mall-toggle-shipping-address"
+                       type="checkbox"
+                       name="use_different_shipping" value="1"
+                       id="use_different_shipping">
+                <label class="custom-control-label" for="use_different_shipping">
+                    {{ 'Utiliser une autre adresse de livraison'|_ }}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="mall-shipping-address" style="display: none">
+        <h3 class="mall-signup__subheading">
+            {{ 'Adresse de livraison'|_ }}
+        </h3>
+        {% partial __SELF__ ~ '::addressform' type='shipping' %}
+    </div>
+
+    {% partial __SELF__ ~ '::terms' %}
+
+    <div class="mall-form-actions">
+        <button class="btn btn-primary btn-block mall-btn-signup" type="submit">
+            {{ "S'inscrire"|_ }}
+        </button>
+    </div>
+</form>
+";s:5:"mtime";i:1650537433;s:6:"markup";s:5913:"<form data-request="onSignup" data-request-validate data-request-flash>
+
+    <div class="form-group">
+        <label for="civilite">{{ 'Civilité'|_ }}</label>
+        <select id="civilite" class="custom-select" name="goldtest_civility">
+            <option value="Madame">{{ 'Madame'|_ }}</option>
+            <option value="Monsieur">{{ 'Monsieur'|_ }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="signup_email">{{ 'Email'|_ }}</label>
+        <input id="signup_email" type="email" placeholder="email@email.com" name="email" class="form-control">
+        <div data-validate-for="email"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="firstname">{{ 'Prénom'|_ }}</label>
+                <input id="firstname" type="text" name="firstname" class="form-control">
+                <div data-validate-for="firstname"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="lastname">{{ 'Nom'|_ }}</label>
+                <input id="lastname" type="text" name="lastname" class="form-control">
+                <div data-validate-for="lastname"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="height">{{ 'Taille (cm)'|_ }}</label>
+                <input id="height" type="text" name="height" class="form-control">
+                <div data-validate-for="height"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="weight">{{ 'Poids (kg)'|_ }}</label>
+                <input id="weight" type="text" name="weight" class="form-control">
+                <div data-validate-for="weight"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="signup_password">{{ 'Mot de passe'|_ }}</label>
+                <input id="signup_password" type="password" name="password" class="form-control">
+                <div data-validate-for="password"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="password_repeat">{{ 'Répéter le mot de passe'|_ }}</label>
+                <input id="password_repeat" type="password" name="password_repeat" class="form-control">
+                <div data-validate-for="password_repeat"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="custom-checkbox">
+            <input type="checkbox" name="goldtest_is_school_member" value="1"
+                   class="custom-control-input js-toggle-school" id="is_school_member">
+            <label class="custom-control-label" for="is_school_member">
+                {{ 'Je travaille pour école de ski'|_ }}
+            </label>
+        </div>
+    </div>
+
+    <div class="school-block" style="display: none">
+        <div class="form-group">
+            <label for="school">{{ 'Ecole/Association/office'|_ }}</label>
+            <select id="school" name="goldtest_school_id" class="custom-select">
+                <option value="">-</option>
+                {% for school in schools %}
+                    <option value="{{ school.id }}">{{ school.name }}</option>
+                {% endfor %}
+            </select>
+            <div data-validate-for="goldtest_school_id"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="goldtest_school_title">{{ 'Titre'|_ }}</label>
+            <select name="goldtest_school_title" id="goldtest_school_title" class="custom-select">
+                {% for title in schools_titles %}
+                    <option value="{{ title.name }}">{{ title.name|_ }}</option>
+                {% endfor %}
+                <option value="CUSTOM">{{ 'Autre'|_ }}</option>
+            </select>
+        </div>
+
+        <div class="form-group school-title-other-block" style="display: none">
+            <label for="goldtest_school_title_other">{{ 'Autre titre (merci de préciser)'|_ }}</label>
+            <input name="goldtest_school_title_other" id="goldtest_school_title_other" type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">{{ 'Numéro de téléphone'|_ }}</label>
+        <input id="phone" type="text" name="goldtest_phone" class="form-control">
+        <div data-validate-for="goldtest_phone"></div>
+    </div>
+
+    <div class="mall-signup__billing-address">
+        <h4 class="mall-signup__subheading">
+            {{ 'Adresse'|_ }}
+        </h4>
+
+        {% partial __SELF__ ~ '::addressform' type='billing' %}
+
+        <div class="mall-signup__shipping-address-option form-group">
+            <div class="custom-checkbox">
+                <input class="custom-control-input js-mall-toggle-shipping-address"
+                       type="checkbox"
+                       name="use_different_shipping" value="1"
+                       id="use_different_shipping">
+                <label class="custom-control-label" for="use_different_shipping">
+                    {{ 'Utiliser une autre adresse de livraison'|_ }}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="mall-shipping-address" style="display: none">
+        <h3 class="mall-signup__subheading">
+            {{ 'Adresse de livraison'|_ }}
+        </h3>
+        {% partial __SELF__ ~ '::addressform' type='shipping' %}
+    </div>
+
+    {% partial __SELF__ ~ '::terms' %}
+
+    <div class="mall-form-actions">
+        <button class="btn btn-primary btn-block mall-btn-signup" type="submit">
+            {{ "S'inscrire"|_ }}
+        </button>
+    </div>
+</form>";s:4:"code";s:169:"function onStart() {
+    $this['schools'] = Goldtest\Site\Models\School::all();
+    $this['schools_titles'] = Goldtest\Site\Models\Settings::get('school_post_titles');
+}";s:17:"_PARSER_ERROR_INI";s:0:"";}}

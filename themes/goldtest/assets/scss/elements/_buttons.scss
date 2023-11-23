@@ -1,0 +1,36 @@
+.btn {
+    padding: 22px 35px 19px 35px;
+}
+
+.btn-primary {
+    &:hover {
+        background-color: $dark-red;
+        border-color: $dark-red;
+    }
+}
+
+.btn-link {
+    font-family: $font-family-base;
+}
+
+.btn-light {
+    font-family: $font-family-base;
+}
+
+//
+//.btn-primary:not(:disabled):not(.disabled):active,
+//.btn-primary:not(:disabled):not(.disabled).active,
+//.show > .btn-primary.dropdown-toggle {
+//    color: $purple;
+//    background-color: $cyan;
+//    border-color: $cyan;
+//}
+//
+//.btn-outline-secondary:hover,
+//.btn-outline-secondary:not(:disabled):not(.disabled):active,
+//.btn-outline-secondary:not(:disabled):not(.disabled).active,
+//.show > .btn-outline-secondary.dropdown-toggle {
+//    color: $purpleLight;
+//    background-color: transparent;
+//    border-color: $purpleLight;
+//}

@@ -1,0 +1,53 @@
+{% if images %}
+    <img src="{{ images.first.thumb(auto, 740) }}"
+         srcset="{{ images.first.thumb(auto, 740) }} 1x, {{ images.first.thumb(auto, 1480) }} 2x"
+         alt="{{ images.first.title }}" class="full-image">
+
+    <div class="thumbnails">
+        {% for image in images %}
+            <a class="thumbnail {{ loop.first ? 'active' }}" href="{{ image.path }}" data-debug="{{ image.path }}"
+               data-full-src="{{ image.thumb(auto, 740) }}"
+               data-full-srcset="{{ image.thumb(auto, 740) }} 1x, {{ image.thumb(auto, 1480) }} 2x">
+                <img srcset="{{ image.thumb(70, 70) }} 1x, {{ image.thumb(140, 140) }} 2x"
+                     src="{{ image.thumb(70, 70) }}" alt="{{ image.title }}">
+            </a>
+        {% endfor %}
+        {% if item.product.videos |length %}
+            {% for key, item in item.product.videos %}
+            <div class="video mr-2" style="background: #fff;cursor: pointer;height: 90px;width:90px;" data-video="{{ item.video|media }}" data-toggle="modal" data-target="#videoModal{{ key }}">
+                {% if item.thumbnail %}
+                <img src="{{ item.thumbnail|media }}" style="width: 100%;max-height: 90px;" alt="play-video">
+                {% else %}
+                <img src="{{ '/assets/images/play-video.png'|theme }}" style="width: 100%;" alt="play-video">
+                {% endif %}
+            </div>
+
+            <div class="modal fade videoM" id="videoModal{{ key }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <video controls width="100%" id="productVideo{{ key }}">
+                        <source src="{{ item.video|media }}" type="video/mp4">
+                    </video>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            {% put scripts %}
+            <script>
+                $(function(){
+                    $('#videoModal{{ key }}').on('shown.bs.modal', function () {
+                        $('#productVideo{{ key }}')[0].play();
+                    });
+                    $('#videoModal{{ key }}').on('hidden.bs.modal', function () {
+                        $('#productVideo{{ key }}')[0].pause();
+                    });
+                });
+            </script>
+            {% endput %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endif %}

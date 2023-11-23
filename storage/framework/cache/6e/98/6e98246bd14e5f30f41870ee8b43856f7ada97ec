@@ -1,0 +1,92 @@
+1698665476a:1:{s:20:"product/property.htm";a:5:{s:8:"fileName";s:20:"product/property.htm";s:7:"content";s:1741:"{% set propertyValue = __SELF__.variantPropertyValues[item.property.id] %}
+<div class="mall-product__property">
+
+    <input type="hidden"
+           data-mall-property
+           name="props[{{ item.property.hashId }}]"
+           value="{{ propertyValue.hashId }}">
+
+    {% if item.property.id != __SELF__.product.group_by_property_id %}
+        {% set isColor = item.property.slug == 'couleurs' %}
+        {% set isSize = item.property.slug == 'size' %}
+        <div class="property-title">
+            {{ item.property.name|_ }}
+
+            {% if isSize %}
+                <a href="#" class="float-right" data-toggle="modal" data-target="#sizeGuide">{{ 'Guide des tailles'|_ }}</a>
+            {% endif %}
+        </div>
+
+        {% for value in item.values %}
+            {% set isSelected = propertyValue.value == value.value %}
+            {% set cssClasses = isSelected ? 'mall-filter__option--selected' : '' %}
+
+            {% if isColor %}
+                {% set cssClasses = cssClasses ~ ' mall-filter__option-color' %}
+
+                {% set hexaColor = '' %}
+
+                {% for option in item.property.options if option.value == value.value  %}
+                    {% set hexaColor = option.color %}
+                {% endfor %}
+            {% endif %}
+
+            <a href="#" data-id="{{ value.hashId }}"
+               class="js-mall-property-selector mall-filter__option {{ cssClasses }}">
+                {% if isColor %}
+                    <span style="background-color: {{ hexaColor }}"></span>
+                {% else %}
+                    {{ value.value|_ }} {{ item.property.unit }}
+                {% endif %}
+            </a>
+        {% endfor %}
+
+        <div class="clearfix"></div>
+    {% endif %}
+</div>
+";s:5:"mtime";i:1575381604;s:6:"markup";s:1740:"{% set propertyValue = __SELF__.variantPropertyValues[item.property.id] %}
+<div class="mall-product__property">
+
+    <input type="hidden"
+           data-mall-property
+           name="props[{{ item.property.hashId }}]"
+           value="{{ propertyValue.hashId }}">
+
+    {% if item.property.id != __SELF__.product.group_by_property_id %}
+        {% set isColor = item.property.slug == 'couleurs' %}
+        {% set isSize = item.property.slug == 'size' %}
+        <div class="property-title">
+            {{ item.property.name|_ }}
+
+            {% if isSize %}
+                <a href="#" class="float-right" data-toggle="modal" data-target="#sizeGuide">{{ 'Guide des tailles'|_ }}</a>
+            {% endif %}
+        </div>
+
+        {% for value in item.values %}
+            {% set isSelected = propertyValue.value == value.value %}
+            {% set cssClasses = isSelected ? 'mall-filter__option--selected' : '' %}
+
+            {% if isColor %}
+                {% set cssClasses = cssClasses ~ ' mall-filter__option-color' %}
+
+                {% set hexaColor = '' %}
+
+                {% for option in item.property.options if option.value == value.value  %}
+                    {% set hexaColor = option.color %}
+                {% endfor %}
+            {% endif %}
+
+            <a href="#" data-id="{{ value.hashId }}"
+               class="js-mall-property-selector mall-filter__option {{ cssClasses }}">
+                {% if isColor %}
+                    <span style="background-color: {{ hexaColor }}"></span>
+                {% else %}
+                    {{ value.value|_ }} {{ item.property.unit }}
+                {% endif %}
+            </a>
+        {% endfor %}
+
+        <div class="clearfix"></div>
+    {% endif %}
+</div>";s:4:"code";N;}}

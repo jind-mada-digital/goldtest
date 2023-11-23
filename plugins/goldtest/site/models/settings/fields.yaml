@@ -1,0 +1,14 @@
+fields:
+    send_contact_to:
+        label: Envoyer les demandes de contact à
+
+    school_post_titles:
+        label: Titres du poste école de Ski
+        type: datatable
+        adding: true
+        btnAddRowLabel: Add Row Above
+        btnAddRowBelowLabel: Add Row Below
+        btnDeleteRowLabel: Delete Row
+        columns:
+            name:
+                title: backend::lang.editor.label

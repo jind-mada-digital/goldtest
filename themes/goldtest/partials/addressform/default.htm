@@ -1,0 +1,10 @@
+<form data-request="onSubmit" data-request-validate class="mall-address-form">
+    <div class="mall-address-form__form">
+        {% partial __SELF__ ~ '::form' %}
+    </div>
+    <div class="mall-address-form__actions">
+        <button class="btn btn-primary" type="submit" data-attach-loading>
+            {{ 'offline.mall::frontend.save' | trans }}
+        </button>
+    </div>
+</form>

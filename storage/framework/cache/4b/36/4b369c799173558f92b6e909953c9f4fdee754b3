@@ -1,0 +1,2 @@
+1698662719a:1:{s:19:"cart/table/base.htm";a:5:{s:8:"fileName";s:19:"cart/table/base.htm";s:7:"content";s:43:"{% partial __SELF__ ~ '::table/entries' %}
+";s:5:"mtime";i:1573741288;s:6:"markup";s:42:"{% partial __SELF__ ~ '::table/entries' %}";s:4:"code";N;}}

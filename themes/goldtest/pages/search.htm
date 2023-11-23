@@ -1,0 +1,95 @@
+title = "Search"
+url = "/search"
+layout = "default"
+is_hidden = 0
+
+[searchResults]
+resultsPerPage = 10
+showProviderBadge = 1
+noResultsMessage = "No results."
+visitPageMessage = "Voir la page de l’article"
+
+[searchInput]
+useAutoComplete = 0
+autoCompleteResultCount = 5
+showProviderBadge = 1
+searchPage = "search.htm"
+==
+<div class="container search-input-area" style="min-height: 300px;">
+    <div class="search-input-area-inner">
+        <form action="{{ searchInput.searchPage | page }}?q={{ query | url_encode(true) }}" method="get">
+            <div class="ss-search-form">
+                <div class="ss-search-form__input">
+                    <input class="form-control" name="q" type="text" placeholder="{{ 'goldtest.mall::lang.label.search' | trans }}"
+                           value="{{ searchInput.query }}"
+                           autocomplete="off"
+                           autofocus
+                    >
+                    <button class="btn btn-primary" type="submit">{{ 'goldtest.mall::lang.label.search' | trans }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% component 'searchResults' %}
+</div>
+
+<style>
+.search-input-area-inner {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.search-input-area .ss-search-form__input {
+    display: flex;
+}
+.search-input-area .ss-search-form__input input {
+    padding: 2rem;
+}
+.search-input-area .ss-result {
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 1em;
+}
+.search-input-area .ss-result__aside {
+    margin-right: .5em;
+    min-width: 150px;
+    display: flex;
+    height: 100%;
+}
+.search-input-area .ss-result__title {
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+.search-input-area .ss-result__badge {
+    font-size: .7em;
+    padding: .2em .5em;
+    border-radius: 4px;
+    margin-left: .75em;
+    background: #eee;
+    display: inline-block;
+}
+.search-input-area .ss-result__text {
+    margin-bottom: .5em;
+    text-transform: lowercase;
+}
+.search-input-area .ss-result__url {
+}
+
+.search-input-area .ss-search-form {
+    position: relative;
+}
+.search-input-area .ss-search-form__results {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 35px;
+    width: 100%;
+    background: #fff;
+    padding: 1em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+.search-input-area .ss-search-form__results--visible {
+    display: block;
+}
+</style>

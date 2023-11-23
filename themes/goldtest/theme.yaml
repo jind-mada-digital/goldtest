@@ -1,0 +1,11 @@
+name: Goldtest
+description: ''
+author: ''
+homepage: ''
+code: ''
+form:
+    fields:
+        title_sufix:
+            label: 'Title suffix'
+        meta_description:
+            label: 'Default meta description'

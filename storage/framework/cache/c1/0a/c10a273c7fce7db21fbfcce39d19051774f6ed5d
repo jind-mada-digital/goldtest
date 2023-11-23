@@ -1,0 +1,128 @@
+1698666280a:1:{s:19:"template/footer.htm";a:7:{s:8:"fileName";s:19:"template/footer.htm";s:7:"content";s:3515:"[viewBag]
+
+[staticMenu footerMenu]
+code = "footer"
+==
+<footer id="footer">
+    <div class="container">
+        <img src="{{ 'assets/images/logos/goldtest-logo-white.svg'|theme }}" alt="GOLDTEST of Switzerland">
+
+        <div class="row">
+            <div class="col-lg-4 col-left">
+                <a href="https://www.facebook.com/goldtest.ch/" target="_blank"><img src="{{ 'assets/images/logos/facebook.svg'|theme }}" alt="Facebook"></a>&nbsp;&nbsp;
+                <a href="https://www.instagram.com/goldtest/" target="_blank"><img src="{{ 'assets/images/logos/instagram.svg'|theme }}" alt="Instagram"></a>
+                 <div class="titlenewsletter">{{ 'Newsletter'|_ }}</div>
+                <script type="text/javascript"
+                        src="https://webform.statslive.info/ow/eyJpdiI6IllnSWVUdlU1aG5kbjVtVWxJbVZqVjl3a2ZudmhZa0hhdU1zVEpsdTNSNm89IiwidmFsdWUiOiJMMFF0R3AzZVBcL0ZLaXFJRzVOY3NTRTFMclI4Wkg3WmdOSnhFcWpzNEEwRT0iLCJtYWMiOiIwMjI0YWEzZTMwMWQ3NjkxZjI2Mzc3MjIyNDE4YWM0YjI0ZGY4OThjNTU0ZGU5N2E3OTc0N2RlZDUzZTM3MTU4In0="></script>
+            </div>
+            <div class="col-lg-4 col-center">
+                <div class="title">{{ 'Navigation'|_ }}</div>
+
+                <ul class="list-unstyled">
+                    {% for item in footerMenu.menuItems %}
+                        <li>
+                            <a href="{{ item.url }}{{ item.code == 'contact' ? '#contact' }}">{{ item.title|_ }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+			  <div class="title">{{ 'Downloads'|_ }}</div>
+                <ul class="list-unstyled">
+                        <li>
+                            <a href="https://goldtest.ch/storage/app/media/downloads/Affiche-Triple-Up-2022-3.pdf" target="_blank">{{ 'Special offer'|_ }}</a>
+                        </li>
+					  	<li>
+                            <a href="https://goldtest.ch/storage/app/media/downloads/bulletin-de-retour-goldtest-2022.pdf" target="_blank">{{ 'Return Form'|_ }}</a>
+                        </li>
+               </ul>
+            </div>
+            <div class="col-lg-4 col-right">
+                <span class="title">{{ 'Partenaires'|_ }}</span>
+
+                <div class="partners">
+                    <img src="{{ 'assets/images/logos/partenaires/swiss-ski@2x.png'|theme }}" alt="Swiss ski school"
+                         width="20%" class="mr-4">
+                    <img src="{{ 'assets/images/logos/partenaires/suisse_fr@2x.png'|theme }}" alt="Suisse Tourisme"
+                         width="57%"><br>
+                    <img src="{{ 'assets/images/logos/partenaires/demo_team@2x.png'|theme }}"
+                         alt="swiss snowsports demo team"
+                         width="128" class="mt-4">
+                </div>
+
+                <span class="title">{{ 'Services de paiement'|_ }}</span>
+                <img src="{{ 'assets/images/logos/service_payment.svg'|theme }}"
+                     alt="VISA, mastercard, PostFinance">
+                <br/>
+                <img src="{{ 'assets/images/logos/twint.png'|theme }}"
+                     alt="Twint Payment"
+                     width="105px"
+                     class="mt-4">
+            </div>
+        </div>
+        <div class="made-by text-lg-right">
+            <p>{{ 'Site fait en Suisse par'|_ }} <a href="https://www.sitery.ch" target="_blank"> Sitery</a></p>
+        </div>
+    </div>
+    
+</footer>
+{% partial 'popup-banner' %}";s:5:"mtime";i:1671697166;s:6:"markup";s:3456:"<footer id="footer">
+    <div class="container">
+        <img src="{{ 'assets/images/logos/goldtest-logo-white.svg'|theme }}" alt="GOLDTEST of Switzerland">
+
+        <div class="row">
+            <div class="col-lg-4 col-left">
+                <a href="https://www.facebook.com/goldtest.ch/" target="_blank"><img src="{{ 'assets/images/logos/facebook.svg'|theme }}" alt="Facebook"></a>&nbsp;&nbsp;
+                <a href="https://www.instagram.com/goldtest/" target="_blank"><img src="{{ 'assets/images/logos/instagram.svg'|theme }}" alt="Instagram"></a>
+                 <div class="titlenewsletter">{{ 'Newsletter'|_ }}</div>
+                <script type="text/javascript"
+                        src="https://webform.statslive.info/ow/eyJpdiI6IllnSWVUdlU1aG5kbjVtVWxJbVZqVjl3a2ZudmhZa0hhdU1zVEpsdTNSNm89IiwidmFsdWUiOiJMMFF0R3AzZVBcL0ZLaXFJRzVOY3NTRTFMclI4Wkg3WmdOSnhFcWpzNEEwRT0iLCJtYWMiOiIwMjI0YWEzZTMwMWQ3NjkxZjI2Mzc3MjIyNDE4YWM0YjI0ZGY4OThjNTU0ZGU5N2E3OTc0N2RlZDUzZTM3MTU4In0="></script>
+            </div>
+            <div class="col-lg-4 col-center">
+                <div class="title">{{ 'Navigation'|_ }}</div>
+
+                <ul class="list-unstyled">
+                    {% for item in footerMenu.menuItems %}
+                        <li>
+                            <a href="{{ item.url }}{{ item.code == 'contact' ? '#contact' }}">{{ item.title|_ }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+			  <div class="title">{{ 'Downloads'|_ }}</div>
+                <ul class="list-unstyled">
+                        <li>
+                            <a href="https://goldtest.ch/storage/app/media/downloads/Affiche-Triple-Up-2022-3.pdf" target="_blank">{{ 'Special offer'|_ }}</a>
+                        </li>
+					  	<li>
+                            <a href="https://goldtest.ch/storage/app/media/downloads/bulletin-de-retour-goldtest-2022.pdf" target="_blank">{{ 'Return Form'|_ }}</a>
+                        </li>
+               </ul>
+            </div>
+            <div class="col-lg-4 col-right">
+                <span class="title">{{ 'Partenaires'|_ }}</span>
+
+                <div class="partners">
+                    <img src="{{ 'assets/images/logos/partenaires/swiss-ski@2x.png'|theme }}" alt="Swiss ski school"
+                         width="20%" class="mr-4">
+                    <img src="{{ 'assets/images/logos/partenaires/suisse_fr@2x.png'|theme }}" alt="Suisse Tourisme"
+                         width="57%"><br>
+                    <img src="{{ 'assets/images/logos/partenaires/demo_team@2x.png'|theme }}"
+                         alt="swiss snowsports demo team"
+                         width="128" class="mt-4">
+                </div>
+
+                <span class="title">{{ 'Services de paiement'|_ }}</span>
+                <img src="{{ 'assets/images/logos/service_payment.svg'|theme }}"
+                     alt="VISA, mastercard, PostFinance">
+                <br/>
+                <img src="{{ 'assets/images/logos/twint.png'|theme }}"
+                     alt="Twint Payment"
+                     width="105px"
+                     class="mt-4">
+            </div>
+        </div>
+        <div class="made-by text-lg-right">
+            <p>{{ 'Site fait en Suisse par'|_ }} <a href="https://www.sitery.ch" target="_blank"> Sitery</a></p>
+        </div>
+    </div>
+    
+</footer>
+{% partial 'popup-banner' %}";s:4:"code";N;s:7:"viewBag";a:0:{}s:21:"staticMenu footerMenu";a:1:{s:4:"code";s:6:"footer";}}}

@@ -1,0 +1,37 @@
+<div class="sidebar-box">
+    <h4 class="sidebar-box__heading">
+        Détails utilisateur
+    </h4>
+
+    <?php $user = $order['customer']['user'] ?? null; ?>
+
+    <p>
+        <?= $user->goldtest_civility ?><br>
+        <a href="<?= $customerPreview . '/' . e($order['id']); ?>">
+            <b><?= $user->name .' '. $user->surname ?></b>
+        </a><br>
+        <a href="mailto:<?= e($user->email) ?>"><?= e($user->email); ?></a><br>
+        Tél: <?= $user->goldtest_phone ?><br>
+    </p>
+</div>
+
+<?php if ($userComment = $order['goldtest_customer_comment']): ?>
+<div class="sidebar-box">
+    <h4 class="sidebar-box__heading">
+        Remarque utilisateur
+    </h4>
+    <p><?= nl2br(e($userComment)); ?></p>
+</div>
+<?php endif; ?>
+
+<?php if($order->isGoldtestSchoolOrder() && $school = $user->goldtest_school): ?>
+<div class="sidebar-box">
+    <h4 class="sidebar-box__heading">
+        Ecole de ski
+    </h4>
+    <p>
+        <?= $school->name ?><br>
+        <?= $user->goldtest_school_title ?><br>
+    </p>
+</div>
+<?php endif; ?>

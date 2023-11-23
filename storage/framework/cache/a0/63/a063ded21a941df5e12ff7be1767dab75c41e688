@@ -1,0 +1,23 @@
+1698665476a:1:{s:22:"orderslist/address.htm";a:5:{s:8:"fileName";s:22:"orderslist/address.htm";s:7:"content";s:319:"<p>
+    {% if address.company %}
+        {{ address.company }}<br />
+    {% endif %}
+    {{ address.name }}<br />
+    {{ address.lines | nl2br }}<br />
+    {{ address.zip }} {{ address.city }}<br />
+    {% if address.state_id %}
+        {{ address.state.name }}<br />
+    {% endif %}
+    {{ address.country.name }}
+</p>";s:5:"mtime";i:1574256130;s:6:"markup";s:319:"<p>
+    {% if address.company %}
+        {{ address.company }}<br />
+    {% endif %}
+    {{ address.name }}<br />
+    {{ address.lines | nl2br }}<br />
+    {{ address.zip }} {{ address.city }}<br />
+    {% if address.state_id %}
+        {{ address.state.name }}<br />
+    {% endif %}
+    {{ address.country.name }}
+</p>";s:4:"code";N;}}

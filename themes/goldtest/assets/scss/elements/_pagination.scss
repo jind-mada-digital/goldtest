@@ -1,0 +1,35 @@
+.pagination {
+    margin: 40px;
+    justify-content: center;
+
+    a, span {
+        text-decoration: none;
+        display: block;
+        float: left;
+        margin: 0 15px 10px 0;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 13px;
+        color: $grey;
+        border: 3px solid $light-grey;
+        background: $light-grey;
+        min-width: 50px;
+        text-align: center;
+    }
+
+    a {
+        cursor: pointer;
+    }
+
+    li.active a,
+    li.active span {
+        background: $white;
+        color: $dark-grey;
+        border-color: $dark-grey;
+    }
+
+    li:last-child a,
+    li:last-child span {
+        margin-right: 0;
+    }
+}

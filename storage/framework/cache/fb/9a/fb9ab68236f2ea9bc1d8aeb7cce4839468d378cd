@@ -1,0 +1,56 @@
+1698665476a:1:{s:18:"mainmenu/items.htm";a:5:{s:8:"fileName";s:18:"mainmenu/items.htm";s:7:"content";s:1217:"{% for item in items if not item.viewBag.isHidden %}
+    <li role="presentation"
+        class="nav-item {{ item.items ? 'dropdown' }} {{ item.isActive ? 'active' }}">
+
+        {% if item.items %}
+            <a class="nav-link dropdown-toggle  {{ item.viewBag.cssClass }}" href="#" id="navbarDropdown{{ item.id }}"
+               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ item.title }}
+            </a>
+        {% elseif item.url %}
+            <a class="nav-link  {{ item.viewBag.cssClass }}" href="{{ item.url }}" {{ item.viewBag.isExternal ? 'target="_blank"' }}>
+                {{ item.title }}
+            </a>
+        {% else %}
+            <span class="{{ item.viewBag.cssClass }}">{{ item.title }}</span>
+        {% endif %}
+
+        {% if item.items %}
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ item.id }}">
+                {% for subitem in item.items if not subitem.viewBag.isHidden %}
+                    <a class="dropdown-item" href="{{ subitem.url }}">
+                        {{ subitem.title }}
+                    </a>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}
+";s:5:"mtime";i:1571741022;s:6:"markup";s:1216:"{% for item in items if not item.viewBag.isHidden %}
+    <li role="presentation"
+        class="nav-item {{ item.items ? 'dropdown' }} {{ item.isActive ? 'active' }}">
+
+        {% if item.items %}
+            <a class="nav-link dropdown-toggle  {{ item.viewBag.cssClass }}" href="#" id="navbarDropdown{{ item.id }}"
+               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ item.title }}
+            </a>
+        {% elseif item.url %}
+            <a class="nav-link  {{ item.viewBag.cssClass }}" href="{{ item.url }}" {{ item.viewBag.isExternal ? 'target="_blank"' }}>
+                {{ item.title }}
+            </a>
+        {% else %}
+            <span class="{{ item.viewBag.cssClass }}">{{ item.title }}</span>
+        {% endif %}
+
+        {% if item.items %}
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ item.id }}">
+                {% for subitem in item.items if not subitem.viewBag.isHidden %}
+                    <a class="dropdown-item" href="{{ subitem.url }}">
+                        {{ subitem.title }}
+                    </a>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}";s:4:"code";N;}}

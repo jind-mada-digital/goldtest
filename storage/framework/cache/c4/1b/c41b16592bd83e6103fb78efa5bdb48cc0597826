@@ -1,0 +1,8 @@
+1698665476a:1:{s:23:"addresslist/actions.htm";a:5:{s:8:"fileName";s:23:"addresslist/actions.htm";s:7:"content";s:209:"<a class="btn btn-primary btn-sm float-right mb-4"
+   href="{{ __SELF__.addressPage | page({ address: "new", redirect: "account" }) }}">
+    {{ 'offline.mall::frontend.address_selector.create' | trans }}
+</a>
+";s:5:"mtime";i:1574250402;s:6:"markup";s:208:"<a class="btn btn-primary btn-sm float-right mb-4"
+   href="{{ __SELF__.addressPage | page({ address: "new", redirect: "account" }) }}">
+    {{ 'offline.mall::frontend.address_selector.create' | trans }}
+</a>";s:4:"code";N;}}

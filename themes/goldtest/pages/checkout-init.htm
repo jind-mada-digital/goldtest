@@ -1,0 +1,24 @@
+title = "Gestion de la commande"
+url = "/checkout"
+layout = "default"
+is_hidden = 0
+
+[viewBag]
+localeUrl[en] = "/checkout/mode"
+
+[signUp]
+
+[goldtestInitCheckout]
+==
+{% if not user %}
+    {% component 'signUp' %}
+{% else %}
+    <div class="container">
+        <h1 class="h2">{{ this.page.title }}</h1>
+
+        <p class="h4">{{ 'Faire un choix'|_ }}</p>
+
+        {% component 'goldtestInitCheckout' %}
+
+    </div>
+{% endif %}

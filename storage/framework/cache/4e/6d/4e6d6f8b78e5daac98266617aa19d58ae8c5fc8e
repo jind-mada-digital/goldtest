@@ -1,0 +1,301 @@
+1698665476a:1:{s:27:"customerprofile/default.htm";a:6:{s:8:"fileName";s:27:"customerprofile/default.htm";s:7:"content";s:6652:"==
+<?php
+function onStart() {
+    $this['isCustomTitle'] = 1;
+    $component = $this->controller->findComponentByName('customerProfile');
+
+    $this['schools'] = Goldtest\Site\Models\School::all();
+    $titles = $this['schools_titles'] = Goldtest\Site\Models\Settings::get('school_post_titles');
+
+    foreach($titles as $title) {
+        if($title['name'] === $component->user->goldtest_school_title) {
+            $this['isCustomTitle'] = 0;
+            break;
+        }
+    }
+
+    if($component->user->goldtest_school_title == '') {
+        $this['isCustomTitle'] = 0;
+    }
+}
+?>
+==
+<form data-request="{{ __SELF__ }}::onSubmit" data-request-validate data-request-flash>
+
+    <div class="form-group">
+        <label for="civilite">{{ 'Civilité'|_ }}</label>
+        <select id="civilite" class="custom-select" name="goldtest_civility">
+            <option value="Madame" {{ __SELF__.user.goldtest_civility == 'Madame' ? 'selected' : '' }}>{{ 'Madame'|_ }}</option>
+            <option value="Monsieur" {{ __SELF__.user.goldtest_civility == 'Monsieur' ? 'selected' : '' }}>{{ 'Monsieur'|_ }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="email">{{ 'Email'|_ }}</label>
+        <input class="form-control" id="email" type="email" placeholder="email@email.com" name="email"
+               value="{{ __SELF__.user.email }}">
+        <div data-validate-for="email"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="firstname">{{ 'Prénom'|_ }}</label>
+                <input class="form-control" id="firstname" type="text" name="firstname"
+                       value="{{ __SELF__.user.customer.firstname }}">
+                <div data-validate-for="firstname"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="lastname">{{ 'Nom'|_ }}</label>
+                <input class="form-control" id="lastname" type="text" name="lastname"
+                       value="{{ __SELF__.user.customer.lastname }}">
+                <div data-validate-for="lastname"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="height">{{ 'Taille (cm)'|_ }}</label>
+                <input class="form-control" id="height" type="text" name="height"
+                       value="{{ __SELF__.user.customer.height }}">
+                <div data-validate-for="height"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="weight">{{ 'Poids (kg)'|_ }}</label>
+                <input class="form-control" id="weight" type="text" name="weight"
+                       value="{{ __SELF__.user.customer.weight }}">
+                <div data-validate-for="weight"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="custom-checkbox">
+            <input type="checkbox" name="goldtest_is_school_member" value="1" {{ __SELF__.user.goldtest_is_school_member == 1 ? 'checked' : ''}}
+                   class="custom-control-input js-toggle-school" id="is_school_member">
+            <label class="custom-control-label" for="is_school_member">
+                {{ 'Je travaille pour école de ski'|_ }}
+            </label>
+        </div>
+    </div>
+
+    <div class="school-block" style="{{ __SELF__.user.goldtest_is_school_member == 1 ? '' : 'display: none'}}">
+        <div class="form-group">
+            <label for="goldtest_school_id">{{ 'Ecole/Association/office'|_ }}</label>
+            <select id="goldtest_school_id" name="goldtest_school_id" class="custom-select">
+                <option value="">-</option>
+                {% for school in schools %}
+                    <option value="{{ school.id }}" {{ __SELF__.user.goldtest_school_id == school.id ? 'selected' : '' }} >{{ school.name }}</option>
+                {% endfor %}
+            </select>
+            <div data-validate-for="goldtest_school_id"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="goldtest_school_title">{{ 'Titre'|_ }}</label>
+            <select name="goldtest_school_title" id="goldtest_school_title" class="custom-select">
+                {% for title in schools_titles %}
+                    <option value="{{ title.name }}" {{ __SELF__.user.goldtest_school_title == title.name ? 'selected' : '' }} >{{ title.name|_ }}</option>
+                {% endfor %}
+                <option value="CUSTOM" {{ isCustomTitle == 1 ? 'selected' : ''}}>{{ 'Autre'|_ }}</option>
+            </select>
+        </div>
+
+        <div class="form-group school-title-other-block" style="{{ isCustomTitle == 1 ? '' : 'display: none'}}">
+            <label for="goldtest_school_title_other">{{ 'Autre titre (merci de préciser)'|_ }}</label>
+            <input name="goldtest_school_title_other" id="goldtest_school_title_other" type="text" class="form-control"
+                value="{{ isCustomTitle ? __SELF__.user.goldtest_school_title : ''}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">{{ 'Numéro de téléphone'|_ }}</label>
+        <input id="phone" type="text" name="goldtest_phone" class="form-control"
+               value="{{ __SELF__.user.goldtest_phone }}">
+        <div data-validate-for="goldtest_phone"></div>
+    </div>
+
+    {% if user.customer.is_guest %}
+        <div class="mall-callout">
+            {{ 'offline.mall::frontend.guest_upgrade.callout' | trans }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="password">{{ 'Mot de passe'|_ }}</label>
+                <input autocomplete="false" class="form-control" id="password" type="text" name="password">
+                <div data-validate-for="password"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="password_repeat">{{ 'Répéter le mot de passe'|_ }}</label>
+                <input class="form-control" id="password_repeat" type="text" name="password_repeat">
+                <div data-validate-for="password_repeat"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mall-form-actions mb-5">
+        <button class="btn btn-primary" type="submit" data-attach-loading>
+            {{ 'offline.mall::frontend.save' | trans }}
+        </button>
+    </div>
+</form>
+{% partial __SELF__ ~ '::scripts' %}
+";s:5:"mtime";i:1650537403;s:6:"markup";s:6066:"<form data-request="{{ __SELF__ }}::onSubmit" data-request-validate data-request-flash>
+
+    <div class="form-group">
+        <label for="civilite">{{ 'Civilité'|_ }}</label>
+        <select id="civilite" class="custom-select" name="goldtest_civility">
+            <option value="Madame" {{ __SELF__.user.goldtest_civility == 'Madame' ? 'selected' : '' }}>{{ 'Madame'|_ }}</option>
+            <option value="Monsieur" {{ __SELF__.user.goldtest_civility == 'Monsieur' ? 'selected' : '' }}>{{ 'Monsieur'|_ }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="email">{{ 'Email'|_ }}</label>
+        <input class="form-control" id="email" type="email" placeholder="email@email.com" name="email"
+               value="{{ __SELF__.user.email }}">
+        <div data-validate-for="email"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="firstname">{{ 'Prénom'|_ }}</label>
+                <input class="form-control" id="firstname" type="text" name="firstname"
+                       value="{{ __SELF__.user.customer.firstname }}">
+                <div data-validate-for="firstname"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="lastname">{{ 'Nom'|_ }}</label>
+                <input class="form-control" id="lastname" type="text" name="lastname"
+                       value="{{ __SELF__.user.customer.lastname }}">
+                <div data-validate-for="lastname"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="height">{{ 'Taille (cm)'|_ }}</label>
+                <input class="form-control" id="height" type="text" name="height"
+                       value="{{ __SELF__.user.customer.height }}">
+                <div data-validate-for="height"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="weight">{{ 'Poids (kg)'|_ }}</label>
+                <input class="form-control" id="weight" type="text" name="weight"
+                       value="{{ __SELF__.user.customer.weight }}">
+                <div data-validate-for="weight"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="custom-checkbox">
+            <input type="checkbox" name="goldtest_is_school_member" value="1" {{ __SELF__.user.goldtest_is_school_member == 1 ? 'checked' : ''}}
+                   class="custom-control-input js-toggle-school" id="is_school_member">
+            <label class="custom-control-label" for="is_school_member">
+                {{ 'Je travaille pour école de ski'|_ }}
+            </label>
+        </div>
+    </div>
+
+    <div class="school-block" style="{{ __SELF__.user.goldtest_is_school_member == 1 ? '' : 'display: none'}}">
+        <div class="form-group">
+            <label for="goldtest_school_id">{{ 'Ecole/Association/office'|_ }}</label>
+            <select id="goldtest_school_id" name="goldtest_school_id" class="custom-select">
+                <option value="">-</option>
+                {% for school in schools %}
+                    <option value="{{ school.id }}" {{ __SELF__.user.goldtest_school_id == school.id ? 'selected' : '' }} >{{ school.name }}</option>
+                {% endfor %}
+            </select>
+            <div data-validate-for="goldtest_school_id"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="goldtest_school_title">{{ 'Titre'|_ }}</label>
+            <select name="goldtest_school_title" id="goldtest_school_title" class="custom-select">
+                {% for title in schools_titles %}
+                    <option value="{{ title.name }}" {{ __SELF__.user.goldtest_school_title == title.name ? 'selected' : '' }} >{{ title.name|_ }}</option>
+                {% endfor %}
+                <option value="CUSTOM" {{ isCustomTitle == 1 ? 'selected' : ''}}>{{ 'Autre'|_ }}</option>
+            </select>
+        </div>
+
+        <div class="form-group school-title-other-block" style="{{ isCustomTitle == 1 ? '' : 'display: none'}}">
+            <label for="goldtest_school_title_other">{{ 'Autre titre (merci de préciser)'|_ }}</label>
+            <input name="goldtest_school_title_other" id="goldtest_school_title_other" type="text" class="form-control"
+                value="{{ isCustomTitle ? __SELF__.user.goldtest_school_title : ''}}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">{{ 'Numéro de téléphone'|_ }}</label>
+        <input id="phone" type="text" name="goldtest_phone" class="form-control"
+               value="{{ __SELF__.user.goldtest_phone }}">
+        <div data-validate-for="goldtest_phone"></div>
+    </div>
+
+    {% if user.customer.is_guest %}
+        <div class="mall-callout">
+            {{ 'offline.mall::frontend.guest_upgrade.callout' | trans }}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="password">{{ 'Mot de passe'|_ }}</label>
+                <input autocomplete="false" class="form-control" id="password" type="text" name="password">
+                <div data-validate-for="password"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="password_repeat">{{ 'Répéter le mot de passe'|_ }}</label>
+                <input class="form-control" id="password_repeat" type="text" name="password_repeat">
+                <div data-validate-for="password_repeat"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mall-form-actions mb-5">
+        <button class="btn btn-primary" type="submit" data-attach-loading>
+            {{ 'offline.mall::frontend.save' | trans }}
+        </button>
+    </div>
+</form>
+{% partial __SELF__ ~ '::scripts' %}";s:4:"code";s:569:"function onStart() {
+    $this['isCustomTitle'] = 1;
+    $component = $this->controller->findComponentByName('customerProfile');
+
+    $this['schools'] = Goldtest\Site\Models\School::all();
+    $titles = $this['schools_titles'] = Goldtest\Site\Models\Settings::get('school_post_titles');
+
+    foreach($titles as $title) {
+        if($title['name'] === $component->user->goldtest_school_title) {
+            $this['isCustomTitle'] = 0;
+            break;
+        }
+    }
+
+    if($component->user->goldtest_school_title == '') {
+        $this['isCustomTitle'] = 0;
+    }
+}";s:17:"_PARSER_ERROR_INI";s:0:"";}}

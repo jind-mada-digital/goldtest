@@ -1,0 +1,97 @@
+.mall-products-item {
+    & > a {
+        display: block;
+        text-align: center;
+        min-height: 800px;
+        padding: 30px 30px 20px 30px;
+        position: relative;
+        border-bottom: 1px solid $light-grey;
+        text-decoration: none;
+
+        &:hover {
+            background: $light-grey;
+        }
+    }
+
+    &:nth-child(odd) > a {
+        border-right: 1px solid $light-grey;
+    }
+
+    &__top-icons {
+        position: absolute;
+        right: 30px;
+
+        .category-league5 {
+            display: block;
+            float: left;
+            background: url(../images/icons/60_pro-red.svg) center center no-repeat;
+            width: 60px;
+            height: 60px;
+            padding: 10px;
+        }
+
+        .gender-Homme,
+        .gender-Femme,
+        .gender-Unisex {
+            display: block;
+            float: left;
+            background: url(../images/icons/60_pro-red.svg) center center no-repeat;
+            width: 60px;
+            height: 60px;
+            padding: 10px;
+        }
+
+        .gender-Homme {
+            background: url(../images/icons/60_man.svg) center center no-repeat;
+        }
+
+        .gender-Femme {
+            background: url(../images/icons/60_woman.svg) center center no-repeat;
+        }
+
+        .gender-Unisex {
+            background: url(../images/icons/60_hybrid.svg) center center no-repeat;
+        }
+    }
+
+    &__category {
+        font-family: $headings-font-family;
+        font-size: 20px;
+        text-transform: uppercase;
+        color: $grey;
+        margin-top: 20px;
+    }
+
+    &__name {
+        font-size: 40px;
+        font-family: $headings-font-family;
+        color: $black;
+        margin-bottom: 10px;
+    }
+
+    &__gender {
+        font-size: 22px;
+        color: $grey;
+    }
+
+    &__price {
+        font-family: $headings-font-family;
+        font-size: 20px;
+        margin: 4px 0;
+
+        &.reduced-price {
+            color: $primary-red;
+        }
+    }
+
+    &__old-price {
+        font-size: 12px;
+        color: $dark-grey;
+    }
+
+    &__cant_see_price {
+        color: $grey;
+        font-size: 18px;
+        margin-top: 7px;
+    }
+}

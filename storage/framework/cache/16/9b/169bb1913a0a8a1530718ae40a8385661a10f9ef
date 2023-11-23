@@ -1,0 +1,30 @@
+1698666280a:1:{s:16:"cart/default.htm";a:5:{s:8:"fileName";s:16:"cart/default.htm";s:7:"content";s:414:"<div class="mall-cart">
+    {% if cart.products.count < 1 %}
+        <div class="mall-cart__empty">
+            {{ 'offline.mall::frontend.cart.empty' | trans }}
+        </div>
+    {% else %}
+        {% partial __SELF__ ~ '::table/base' %}
+
+        {% if __SELF__.showDiscountApplier %}
+            {% component 'discountApplier' %}
+        {% endif %}
+    {% endif %}
+</div>
+
+{% partial __SELF__ ~ '::scripts' %}
+";s:5:"mtime";i:1604052436;s:6:"markup";s:413:"<div class="mall-cart">
+    {% if cart.products.count < 1 %}
+        <div class="mall-cart__empty">
+            {{ 'offline.mall::frontend.cart.empty' | trans }}
+        </div>
+    {% else %}
+        {% partial __SELF__ ~ '::table/base' %}
+
+        {% if __SELF__.showDiscountApplier %}
+            {% component 'discountApplier' %}
+        {% endif %}
+    {% endif %}
+</div>
+
+{% partial __SELF__ ~ '::scripts' %}";s:4:"code";N;}}

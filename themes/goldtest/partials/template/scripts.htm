@@ -1,0 +1,38 @@
+[viewBag]
+==
+
+<script src="{{ [
+    'assets/vendor/jquery/jquery-3.4.1.min.js',
+
+    '@framework',
+    '@framework.extras',
+
+    'assets/vendor/popper/popper-1.15.0.min.js',
+
+    'assets/vendor/bootstrap/js/index.js',
+    'assets/vendor/bootstrap/js/util.js',
+    'assets/vendor/bootstrap/js/alert.js',
+    'assets/vendor/bootstrap/js/button.js',
+
+    'assets/vendor/bootstrap/js/carousel.js',
+    'assets/vendor/bootstrap/js/collapse.js',
+    'assets/vendor/bootstrap/js/dropdown.js',
+    'assets/vendor/bootstrap/js/modal.js',
+    'assets/vendor/bootstrap/js/scrollspy.js',
+    'assets/vendor/bootstrap/js/tab.js',
+
+    'assets/vendor/bootstrap/js/tooltip.js',
+    'assets/vendor/bootstrap/js/popover.js',
+
+    'assets/js/app.js',
+]|theme }}.js"></script>
+
+{% scripts %}
+
+{% flash %}
+    <p data-control="flash-message"
+       class="flash-message fade {{ type }}"
+       data-interval="{{ type in ['error', 'warning'] ? 15 : 5 }}">
+        {{ message }}
+    </p>
+{% endflash %}

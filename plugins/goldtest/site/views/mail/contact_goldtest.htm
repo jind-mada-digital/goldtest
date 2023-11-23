@@ -1,0 +1,28 @@
+subject = "Demande de contact"
+layout = "default"
+description = "Mail envoyé à Spark lors de l'envois du formulaire d'offre"
+==
+Bonjour,
+
+Une nouvelle demande de contact est arrivée via le formulaire de contact du site internet Goldtest.
+
+Nom: {{ contact.name }}
+Email: {{ contact.email }}
+Téléphone: {{ contact.phone }}
+Ecole suisse de ski: {{ contact.is_a_swiss_ski_school ? 'Oui':'Non' }}
+Message:
+{{ contact.message|nl2br }}
+
+==
+<p>
+    Bonjour,<br><br>
+    Une nouvelle demande de contact est arrivée via le formulaire de contact du site internet Goldtest.
+</p>
+
+<p>
+    <b>Nom</b>: {{ contact.name }}<br>
+    <b>Email</b>: {{ contact.email }}<br>
+    <b>Téléphone</b>: {{ contact.phone }}<br>
+    <b>Ecole suisse de ski</b>: {{ contact.is_a_swiss_ski_school ? 'Oui':'Non' }}<br>
+    <b>Message</b>:<br> {{ contact.message|nl2br }}<br>
+</p>

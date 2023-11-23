@@ -1,0 +1,26 @@
+<div class="container mall-signup">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mall-signup__signin">
+                <div class="card-header">
+                    <h1>{{ 'Login'|_ }}</h1>
+                </div>
+                <div class="card-body">
+                    {% partial __SELF__ ~ '::signin' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mall-signup__signup mall-signup-form">
+                <div class="card-header">
+                    <h1>{{ 'Inscription'|_ }}</h1>
+                </div>
+                <div class="card-body">
+                    {% partial __SELF__ ~ '::signup' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% partial __SELF__ ~ '::scripts' %}

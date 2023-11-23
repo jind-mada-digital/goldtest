@@ -1,0 +1,61 @@
+<?php $count = $stats->count(); ?>
+<?php if ($count > 0): ?>
+<div class="scoreboard scoreboard--fix-until-toolbar-buttons-are-added" style="min-height: 100px;">
+    <div data-control="toolbar">
+
+        <div class="scoreboard-item title-value">
+            <h4><?= e(trans('offline.mall::lang.common.orders')) ?></h4>
+            <p><?= e($count) ?></p>
+            <p class="description"><?= e(trans('offline.mall::lang.common.since_begin')) ?></p>
+        </div>
+
+        <div class="scoreboard-item title-value">
+            <h4><?= e(trans('offline.mall::lang.common.weekly')) ?></h4>
+            <p><?= e($stats->perWeekCount()) ?></p>
+            <p class="description"><?= e(trans('offline.mall::lang.common.orders')) ?></p>
+        </div>
+
+        <div class="scoreboard-item title-value">
+            <h4><?= e(trans('offline.mall::lang.order.total_revenue')) ?></h4>
+            <p><?= e($money->format($stats->grandTotal())) ?></p>
+            <p class="description"><?= e(trans('offline.mall::lang.common.since_begin')) ?></p>
+        </div>
+
+        <div class="scoreboard-item control-chart" data-control="chart-pie">
+            <ul>
+                <?php foreach($stats->byState() as $state): ?>
+                <li data-color="<?= e($state->color) ?>">
+                    <?= e($state->label) ?>
+                    <span><?= e($state->value)?></span>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <div class="scoreboard-item control-chart" data-control="chart-pie">
+            <ul>
+                <?php foreach($stats->byPaymentState() as $state): ?>
+                <li data-color="<?= e($state->color) ?>">
+                    <?= e($state->label) ?>
+                    <span><?= e($state->value)?></span>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <button type="button" class="btn btn-primary oc-icon-sign-out" onClick="exportUser()">
+        Export Contact
+        </button>
+        <!-- <a href="<?= Backend::url('offline/mall/orders/export-orders') ?>" target="_blank">
+        </a> -->
+    </div>
+</div>
+<script>
+    function exportUser() {
+        const id = $('[name="checked[]"]:checked').val();
+        const URL = `<?= Backend::url('offline/mall/orders/export-orders') ?>/${id}`;
+        window.location.href = URL;
+        //window.open();
+    }
+</script>
+<?php endif; ?>

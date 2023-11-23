@@ -1,0 +1,26 @@
+1698665476a:1:{s:33:"paymentmethodselector/methods.htm";a:5:{s:8:"fileName";s:33:"paymentmethodselector/methods.htm";s:7:"content";s:457:"<h4>{{ 'Méthode de paiement'|_ }}</h4>
+
+<form id="mall-payment-form" data-request-validate>
+    <div class="mall-payment-method">
+        {% for method in __SELF__.methods %}
+            {% if method.code == 'invoice' and cart.billing_address.country.code != 'CH' %}
+                {# Not supported #}
+            {% else %}
+                {% partial __SELF__ ~ '::method' method=method %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</form>
+";s:5:"mtime";i:1579699182;s:6:"markup";s:456:"<h4>{{ 'Méthode de paiement'|_ }}</h4>
+
+<form id="mall-payment-form" data-request-validate>
+    <div class="mall-payment-method">
+        {% for method in __SELF__.methods %}
+            {% if method.code == 'invoice' and cart.billing_address.country.code != 'CH' %}
+                {# Not supported #}
+            {% else %}
+                {% partial __SELF__ ~ '::method' method=method %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</form>";s:4:"code";N;}}

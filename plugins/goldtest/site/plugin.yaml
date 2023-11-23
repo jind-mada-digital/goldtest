@@ -1,0 +1,14 @@
+navigation:
+    schools:
+        label: Ecoles
+        url: goldtest/site/schools
+        icon: icon-graduation-cap
+        sideMenu:
+            new_school:
+                label: Ajouter une école
+                icon: icon-plus
+                url: goldtest/site/schools/create
+            schools:
+                label: Ecoles
+                icon: icon-graduation-cap
+                url: goldtest/site/schools

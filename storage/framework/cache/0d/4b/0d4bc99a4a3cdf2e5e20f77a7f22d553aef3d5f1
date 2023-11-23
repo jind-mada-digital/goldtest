@@ -1,0 +1,91 @@
+1698665476a:1:{s:20:"addressform/form.htm";a:5:{s:8:"fileName";s:20:"addressform/form.htm";s:7:"content";s:2044:"{% if type %}
+    {% set type = (type ~ '_') %}
+{% endif %}
+<div class="form-group">
+    <label for="{{ type }}company">{{ 'Entreprise'|_ }}</label>
+    <input id="{{ type }}company" type="text" class="form-control"
+           value="{{ address.company }}" name="{{ type }}company">
+    <div data-validate-for="{{ type }}company"></div>
+</div>
+<div class="form-group">
+    <label for="{{ type }}address_name">{{ 'offline.mall::frontend.form.recipient' | trans }}</label>
+    <input id="{{ type }}address_name" type="text" class="form-control"
+           value="{{ address.name }}"
+           placeholder="{{ 'offline.mall::frontend.form.recipient_placeholder' | trans }}"
+           name="{{ type }}address_name">
+    <div data-validate-for="{{ type }}address_name"></div>
+</div>
+<div class="form-group">
+    <label for="{{ type }}lines">{{ 'offline.mall::frontend.form.address_lines' | trans }}</label>
+    <textarea id="{{ type }}lines" type="text" name="{{ type }}lines"
+              class="form-control">{{ address.lines }}</textarea>
+    <div data-validate-for="{{ type }}lines"></div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="{{ type }}zip">{{ 'NPA'|_ }}</label>
+            <input id="{{ type }}zip" name="{{ type }}zip" type="text" class="form-control"
+                   value="{{ address.zip }}">
+            <div data-validate-for="{{ type }}zip"></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="{{ type }}city">{{ 'offline.mall::frontend.form.city' | trans }}</label>
+            <input id="{{ type }}city" name="{{ type }}city" type="text" class="form-control"
+                   value="{{ address.city }}">
+            <div data-validate-for="{{ type }}city"></div>
+        </div>
+    </div>
+</div>
+
+<div class="{{ __SELF__.useState ? 'mall-two-fields' }}" id="countryState">
+    {% partial __SELF__ ~ '::countrystate' type=type countryId=address.country_id stateId=address.state_id %}
+</div>";s:5:"mtime";i:1575982306;s:6:"markup";s:2044:"{% if type %}
+    {% set type = (type ~ '_') %}
+{% endif %}
+<div class="form-group">
+    <label for="{{ type }}company">{{ 'Entreprise'|_ }}</label>
+    <input id="{{ type }}company" type="text" class="form-control"
+           value="{{ address.company }}" name="{{ type }}company">
+    <div data-validate-for="{{ type }}company"></div>
+</div>
+<div class="form-group">
+    <label for="{{ type }}address_name">{{ 'offline.mall::frontend.form.recipient' | trans }}</label>
+    <input id="{{ type }}address_name" type="text" class="form-control"
+           value="{{ address.name }}"
+           placeholder="{{ 'offline.mall::frontend.form.recipient_placeholder' | trans }}"
+           name="{{ type }}address_name">
+    <div data-validate-for="{{ type }}address_name"></div>
+</div>
+<div class="form-group">
+    <label for="{{ type }}lines">{{ 'offline.mall::frontend.form.address_lines' | trans }}</label>
+    <textarea id="{{ type }}lines" type="text" name="{{ type }}lines"
+              class="form-control">{{ address.lines }}</textarea>
+    <div data-validate-for="{{ type }}lines"></div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="{{ type }}zip">{{ 'NPA'|_ }}</label>
+            <input id="{{ type }}zip" name="{{ type }}zip" type="text" class="form-control"
+                   value="{{ address.zip }}">
+            <div data-validate-for="{{ type }}zip"></div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="{{ type }}city">{{ 'offline.mall::frontend.form.city' | trans }}</label>
+            <input id="{{ type }}city" name="{{ type }}city" type="text" class="form-control"
+                   value="{{ address.city }}">
+            <div data-validate-for="{{ type }}city"></div>
+        </div>
+    </div>
+</div>
+
+<div class="{{ __SELF__.useState ? 'mall-two-fields' }}" id="countryState">
+    {% partial __SELF__ ~ '::countrystate' type=type countryId=address.country_id stateId=address.state_id %}
+</div>";s:4:"code";N;}}

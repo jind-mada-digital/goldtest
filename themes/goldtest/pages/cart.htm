@@ -1,0 +1,61 @@
+title = "Panier"
+url = "/panier"
+layout = "default"
+is_hidden = 0
+
+[viewBag]
+localeUrl[en] = "/cart"
+
+[cart]
+showTaxes = 0
+
+[goldtestDiscountApplier discountApplier]
+==
+{#
+<div class="container" style="margin-top: 5rem;">
+    <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading">{{'AVIS AUX CLIENTS'|_}}</h4>
+        <p>{{"Nous ne vous remercierons jamais assez pour l'intérêt que vous portez à nos produits."|_}}</p>
+        {% if activeLocale == "de" %}
+        <p>Wie Sie vielleicht wissen, erleben wir derzeit nach einem Brand in unseren Räumlichkeiten in Torgon am 11. Mai 2022 eine schwierige Zeit. Wir können vorübergehend nicht mehr auf Bestellungen unserer lieben Kunden antworten.</p>
+        {% else %}
+        <p>Comme vous le savez peut-être, nous traversons actuellement une période difficile suite à un incendie survenu dans nos locaux à Torgon le 11 mai 2022. Nous ne pouvons temporairement plus répondre aux commandes de nos chers clients.</p>
+        {% endif %}
+        <p>{{"Par conséquent, nous vous prions de nous accorder une courte période de transition afin de rétablir la situation et de revenir vers nous plus tard."|_}}</p>
+        <p>
+            {{"Bien cordialement,"|_}}<br/>
+            {{"L'Équipe Goldtest"|_}}
+        </p>
+    </div>
+</div>
+#}
+
+{#<div class="container" style="margin-top: 5rem;">
+    <div class="alert alert-info" role="alert">
+        {{"Livraisons repoussées au 15 novembre 2022 suite à un incendie survenu dans nos locaux. Merci de votre compréhension."|_}}
+    </div>
+</div>
+#}
+
+
+<div class="container">
+    <div class="block-simple-head">
+        <h1 class="small-page-heading">{{ 'Panier'|_ }}</h1>
+    </div>
+</div>
+
+<div class="container">
+    {% component 'cart' %}
+</div>
+
+{% if cart.products.count > 0 %}
+    <div class="container">
+        <div class="mall-cart-actions text-right">
+            <a href="{{ 'checkout' | page }}" class="btn btn-primary">
+                {{ 'Valider le panier'|_ }}
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+

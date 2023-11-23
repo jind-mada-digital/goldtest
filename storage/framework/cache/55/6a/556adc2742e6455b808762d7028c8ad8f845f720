@@ -1,0 +1,88 @@
+1698665476a:1:{s:26:"productsfilter/default.htm";a:5:{s:8:"fileName";s:26:"productsfilter/default.htm";s:7:"content";s:1777:"<form class="mall-products-filter">
+    <input type="hidden" name="sort" value="{{ sortOrder }}">
+
+    <div class="container-fluid">
+        <div class="row">
+            {% for group in __SELF__.propertyGroups if group.slug == 'filtres' %}
+
+                {% for property in group.filterable_properties %}
+                    <div class="col-lg-auto">
+                        <h4>{{ property.name|_ }}</h4>
+
+                        {% set values = __SELF__.values[property.id] %}
+                        
+                        {% partial __SELF__ ~ '::set'
+                            filter=__SELF__.filter
+                            property = property
+                            values = values %}
+                    </div>
+                {% endfor %}
+
+
+                <div class="col-lg-auto">
+                    <h4>{{ 'En stock' |_ }}</h4>
+                    <div class="double">
+                        {# <input type="checkbox" id="stockSwitch" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger"> #}
+
+                    </div>
+                    <div class="double-x">
+                        <label class="stock-filter ">
+                        <input type="radio" aria-hidden="true" style="display: none" name="stockV" checked value="1">
+                            {{ 'Oui' |_ }}
+                        </label>
+                        <label class="stock-filter">
+                        <input type="radio" aria-hidden="true" style="display: none" name="stockV" value="0">
+                            {{ 'Tous' |_ }}
+                        </label>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</form>
+
+{% partial __SELF__ ~ '::scripts' %}
+";s:5:"mtime";i:1671543594;s:6:"markup";s:1776:"<form class="mall-products-filter">
+    <input type="hidden" name="sort" value="{{ sortOrder }}">
+
+    <div class="container-fluid">
+        <div class="row">
+            {% for group in __SELF__.propertyGroups if group.slug == 'filtres' %}
+
+                {% for property in group.filterable_properties %}
+                    <div class="col-lg-auto">
+                        <h4>{{ property.name|_ }}</h4>
+
+                        {% set values = __SELF__.values[property.id] %}
+                        
+                        {% partial __SELF__ ~ '::set'
+                            filter=__SELF__.filter
+                            property = property
+                            values = values %}
+                    </div>
+                {% endfor %}
+
+
+                <div class="col-lg-auto">
+                    <h4>{{ 'En stock' |_ }}</h4>
+                    <div class="double">
+                        {# <input type="checkbox" id="stockSwitch" checked data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger"> #}
+
+                    </div>
+                    <div class="double-x">
+                        <label class="stock-filter ">
+                        <input type="radio" aria-hidden="true" style="display: none" name="stockV" checked value="1">
+                            {{ 'Oui' |_ }}
+                        </label>
+                        <label class="stock-filter">
+                        <input type="radio" aria-hidden="true" style="display: none" name="stockV" value="0">
+                            {{ 'Tous' |_ }}
+                        </label>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</form>
+
+{% partial __SELF__ ~ '::scripts' %}";s:4:"code";N;}}

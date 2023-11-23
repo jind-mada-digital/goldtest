@@ -1,0 +1,34 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: 'Nom'
+        type: text
+        span: full
+
+    lines:
+        label: 'offline.mall::frontend.form.address_lines'
+        size: ''
+        span: auto
+        type: textarea
+    zip:
+        label: 'offline.mall::frontend.form.zip'
+        span: left
+        type: text
+    city:
+        label: 'offline.mall::frontend.form.city'
+        span: right
+        type: text
+    country:
+        label: 'offline.mall::frontend.form.country'
+        type: dropdown
+        span: left
+        placeholder: rainlab.location::lang.country.select
+    state:
+        label: 'offline.mall::frontend.form.state'
+        type: dropdown
+        span: right
+        dependsOn: country
+        placeholder: rainlab.location::lang.state.select

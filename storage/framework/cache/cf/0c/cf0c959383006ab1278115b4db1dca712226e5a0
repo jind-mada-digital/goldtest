@@ -1,0 +1,20 @@
+1698665476a:1:{s:24:"checkout/confirminfo.htm";a:5:{s:8:"fileName";s:24:"checkout/confirminfo.htm";s:7:"content";s:437:"{# Use this partial to include custom contents before   #}
+{# the final checkout button (like a terms checkbox or  #}
+{# additional information regarding the order           #}
+
+<div class="row justify-content-end mt-4">
+    <div class="col-lg-7">
+        <label for="checkout_comment">{{ 'Remarque'|_ }}</label>
+        <textarea name="checkout_comment" id="checkout_comment" class="form-control" rows="4"></textarea>
+    </div>
+</div>
+";s:5:"mtime";i:1579684902;s:6:"markup";s:436:"{# Use this partial to include custom contents before   #}
+{# the final checkout button (like a terms checkbox or  #}
+{# additional information regarding the order           #}
+
+<div class="row justify-content-end mt-4">
+    <div class="col-lg-7">
+        <label for="checkout_comment">{{ 'Remarque'|_ }}</label>
+        <textarea name="checkout_comment" id="checkout_comment" class="form-control" rows="4"></textarea>
+    </div>
+</div>";s:4:"code";N;}}

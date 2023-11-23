@@ -1,0 +1,24 @@
+1698662719a:1:{s:23:"cart/table/shipping.htm";a:5:{s:8:"fileName";s:23:"cart/table/shipping.htm";s:7:"content";s:329:"{% if __SELF__.showShipping %}
+    <tr class="mall-cart__shipping">
+        <td colspan="5">
+            + {{ 'Frais de livraison'|_ }}
+        </td>
+        <td class="text-right">
+            {{ shipping.totalPostTaxes | money }}
+        </td>
+    </tr>
+{% else %}
+    {% partial __SELF__ ~ '::shippingexcluded' %}
+{% endif %}
+";s:5:"mtime";i:1573825430;s:6:"markup";s:328:"{% if __SELF__.showShipping %}
+    <tr class="mall-cart__shipping">
+        <td colspan="5">
+            + {{ 'Frais de livraison'|_ }}
+        </td>
+        <td class="text-right">
+            {{ shipping.totalPostTaxes | money }}
+        </td>
+    </tr>
+{% else %}
+    {% partial __SELF__ ~ '::shippingexcluded' %}
+{% endif %}";s:4:"code";N;}}

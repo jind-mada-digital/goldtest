@@ -1,0 +1,33 @@
+{% if hasAppliedNonTriggerCode == false %}
+    <div class="row justify-content-end">
+        <div class="col-lg-7">
+            <div class="mall-discount-applier">
+                <form data-request="onApplyDiscount"
+                      data-request-validate
+                      data-request-flash
+                      data-request-success="$.publish('mall.discount.applied')">
+                    <div class="mall-form-control">
+                        <label for="code">{{ 'Code promotionnel'|_ }}</label>
+                        <div class="input-group">
+                            <input name="code" type="text" id="code" class="form-control">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary btn-sm">
+                                    {{ 'offline.mall::frontend.discount.apply' | trans }}
+                                </button>
+                            </div>
+                        </div>
+                        <div data-validate-for="code"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% else %}
+<div class="row justify-content-end">
+    <div class="col-lg-7">
+        <div class="alert alert-info" role="alert">
+            {{ 'goldtest.mall::lang.components.discountApplier.cartPromotionAlreadyApplied' | trans }}
+        </div>
+    </div>
+</div>
+{% endif %}

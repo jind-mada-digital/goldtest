@@ -1,0 +1,50 @@
+items:
+    -
+        title: Contact
+        nesting: '0'
+        type: static-page
+        url: ''
+        code: contact
+        reference: about
+        cmsPage: ''
+        replace: '0'
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Horaires
+        type: url
+        url: 'https://www.google.ch/search?q=goldtest+horaires'
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '1'
+    -
+        title: 'Conditions générale de vente'
+        nesting: '0'
+        type: static-page
+        url: ''
+        code: ''
+        reference: conditions-generales-de-vente
+        cmsPage: ''
+        replace: '0'
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Chèques Cadeaux - FAQ'
+        nesting: '0'
+        type: static-page
+        url: ''
+        code: ''
+        reference: cheques-cadeaux-faq
+        cmsPage: ''
+        replace: '0'
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: Footer

@@ -1,0 +1,13 @@
+1698666280a:1:{s:11:"product.htm";a:10:{s:8:"fileName";s:11:"product.htm";s:7:"content";s:235:"title = "Product"
+url = "/product/:slug/:variant?"
+layout = "default"
+is_hidden = 0
+
+[goldtestProduct product]
+product = ":slug"
+variant = ":slug"
+redirectOnPropertyChange = 1
+currentVariantReviewsOnly = 0
+==
+{% component 'product' %}
+";s:5:"mtime";i:1617974049;s:6:"markup";s:25:"{% component 'product' %}";s:4:"code";N;s:5:"title";s:7:"Product";s:3:"url";s:24:"/product/:slug/:variant?";s:6:"layout";s:7:"default";s:9:"is_hidden";s:1:"0";s:23:"goldtestProduct product";a:4:{s:7:"product";s:5:":slug";s:7:"variant";s:5:":slug";s:24:"redirectOnPropertyChange";s:1:"1";s:25:"currentVariantReviewsOnly";s:1:"0";}}}

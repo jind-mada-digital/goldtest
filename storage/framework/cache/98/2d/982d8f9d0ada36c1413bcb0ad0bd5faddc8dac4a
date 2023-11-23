@@ -1,0 +1,6 @@
+1698663351a:1:{s:27:"myaccount/pages/profile.htm";a:5:{s:8:"fileName";s:27:"myaccount/pages/profile.htm";s:7:"content";s:100:"<h2>{{ 'offline.mall::frontend.customer_profile' | trans }}</h2>
+
+{% component 'customerProfile' %}
+";s:5:"mtime";i:1604055152;s:6:"markup";s:99:"<h2>{{ 'offline.mall::frontend.customer_profile' | trans }}</h2>
+
+{% component 'customerProfile' %}";s:4:"code";N;}}

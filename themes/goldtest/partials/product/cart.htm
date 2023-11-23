@@ -1,0 +1,32 @@
+<form data-request="onAddToCart"
+      data-request-success="data.added && $.publish('mall.cart.productAdded', data)"
+      data-request-validate
+      data-request-flash
+      id="mall-add-to-cart">
+
+    <div class="mall-product__price">
+        {% partial __SELF__ ~ '::price' item=item %}
+    </div>
+
+    <div class="mall-product__tax-info">
+        {% partial __SELF__ ~ '::tax-info' item=item %}
+    </div>
+
+    {% if props.count > 0 and item.inventory_management_method == 'variant' %}
+        <div class="mall-product__variant-properties">
+            {% partial __SELF__ ~ '::property' item=props.get(7) %}
+            {% partial __SELF__ ~ '::property' item=props.get(4) %}
+            {% partial __SELF__ ~ '::property' item=props.get(5) %}
+        </div>
+    {% endif %}
+
+    <div class="mall-product__add-to-cart">
+        {% if item.allow_out_of_stock_purchases %}
+            {% partial __SELF__ ~ '::addtocart' item=item %}
+        {% else %}
+            <div class="mall-product__property-stock mall-product__property-stock--checking">
+                {{ 'offline.mall::frontend.stock.checking' | trans }}
+            </div>
+        {% endif %}
+    </div>
+</form>

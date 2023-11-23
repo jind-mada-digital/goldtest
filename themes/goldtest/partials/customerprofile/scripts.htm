@@ -1,0 +1,21 @@
+{% put scripts %}
+    <script>
+        $(function () {
+            $('.js-toggle-school').on('click', function () {
+                $('.school-block').toggle(this.checked);
+                if(!this.checked) {
+                    $('#goldtest_school_id').val('');
+                    $('#goldtest_school_title').val('');
+                }
+            });
+            $('select[name="goldtest_school_title"]').on('change', function() {
+                if (this.value === 'CUSTOM') {
+                    $('.school-title-other-block').show();
+                } else {
+                    $('input[name="goldtest_school_title_other"]').val('');
+                    $('.school-title-other-block').hide();
+                }
+            });
+        })
+    </script>
+{% endput %}

@@ -1,0 +1,185 @@
+1698666280a:1:{s:13:"myaccount.htm";a:12:{s:8:"fileName";s:13:"myaccount.htm";s:7:"content";s:3148:"title = "Account"
+url = "/account/:page?"
+layout = "default"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "login"
+
+[myAccount]
+page = "{{ :page }}"
+
+[goldtestCustomerProfile customerProfile]
+==
+<?php
+
+use Goldtest\Mall\Classes\Customer\GoldtestSignUpHandler;
+
+function onStart() {
+  $this['showPopup'] = \Session::get('show_user_fill_details_popup', '');
+  $this['showPopupBool'] = $this['showPopup'] == 'show' ? 1 : 0;
+}
+
+function onEnd() {
+  \Session::put('show_user_fill_details_popup', '');
+}
+
+function onUserDataSubmit() {
+
+  $data = post();
+  $handler = app(GoldtestSignUpHandler::class);
+  $neededRules = array_only($handler::rules(false), [
+      'height',
+      'weight',
+  ]);
+  
+  $validation = Validator::make($data, $neededRules, $handler::messages());
+  if ($validation->fails()) {
+      throw new ValidationException($validation);
+  }
+
+  // else save
+  $user = Auth::getUser();
+  $user->customer->height = $data['height'];
+  $user->customer->weight  = $data['weight'];
+  $user->customer->save();
+
+  // Re-authenticate the user with his new credentials
+  Auth::login($user);
+
+  \Flash::success(trans('offline.mall::lang.common.saved_changes'));
+
+  return \Redirect::to(url('/account'));
+}
+?>
+==
+<div class="control-popup modal fade" id="user-fill-info" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button style="margin-left: 0;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 style="margin-top: 4px;"class="modal-title">{{'Please share more about you'|_}}</h4>
+          </div>
+          <form data-request="onUserDataSubmit" data-request-validate data-request-flash>
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="height">{{ 'Taille (cm)'|_ }}</label>
+                          <input class="form-control" id="height" type="text" name="height"
+                                value="">
+                          <div data-validate-for="height"></div>
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="weight">{{ 'Poids (kg)'|_ }}</label>
+                          <input class="form-control" id="weight" type="text" name="weight"
+                                value="">
+                          <div data-validate-for="weight"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{'cancel'|_}}</button>
+                <button type="submit" class="btn btn-primary">{{'save'|_}}</button>
+            </div>
+          </form>
+      </div>
+  </div>
+</div>
+{% put scripts %}
+<script>
+$(function () {
+  if({{showPopupBool}}) {
+    $('#user-fill-info').modal();
+  }
+});
+</script>
+{% endput %}
+{% component 'myAccount' %}
+";s:5:"mtime";i:1650537362;s:6:"markup";s:1929:"<div class="control-popup modal fade" id="user-fill-info" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button style="margin-left: 0;" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 style="margin-top: 4px;"class="modal-title">{{'Please share more about you'|_}}</h4>
+          </div>
+          <form data-request="onUserDataSubmit" data-request-validate data-request-flash>
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="height">{{ 'Taille (cm)'|_ }}</label>
+                          <input class="form-control" id="height" type="text" name="height"
+                                value="">
+                          <div data-validate-for="height"></div>
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label for="weight">{{ 'Poids (kg)'|_ }}</label>
+                          <input class="form-control" id="weight" type="text" name="weight"
+                                value="">
+                          <div data-validate-for="weight"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{'cancel'|_}}</button>
+                <button type="submit" class="btn btn-primary">{{'save'|_}}</button>
+            </div>
+          </form>
+      </div>
+  </div>
+</div>
+{% put scripts %}
+<script>
+$(function () {
+  if({{showPopupBool}}) {
+    $('#user-fill-info').modal();
+  }
+});
+</script>
+{% endput %}
+{% component 'myAccount' %}";s:4:"code";s:1001:"use Goldtest\Mall\Classes\Customer\GoldtestSignUpHandler;
+
+function onStart() {
+  $this['showPopup'] = \Session::get('show_user_fill_details_popup', '');
+  $this['showPopupBool'] = $this['showPopup'] == 'show' ? 1 : 0;
+}
+
+function onEnd() {
+  \Session::put('show_user_fill_details_popup', '');
+}
+
+function onUserDataSubmit() {
+
+  $data = post();
+  $handler = app(GoldtestSignUpHandler::class);
+  $neededRules = array_only($handler::rules(false), [
+      'height',
+      'weight',
+  ]);
+  
+  $validation = Validator::make($data, $neededRules, $handler::messages());
+  if ($validation->fails()) {
+      throw new ValidationException($validation);
+  }
+
+  // else save
+  $user = Auth::getUser();
+  $user->customer->height = $data['height'];
+  $user->customer->weight  = $data['weight'];
+  $user->customer->save();
+
+  // Re-authenticate the user with his new credentials
+  Auth::login($user);
+
+  \Flash::success(trans('offline.mall::lang.common.saved_changes'));
+
+  return \Redirect::to(url('/account'));
+}";s:5:"title";s:7:"Account";s:3:"url";s:15:"/account/:page?";s:6:"layout";s:7:"default";s:9:"is_hidden";s:1:"0";s:7:"session";a:2:{s:8:"security";s:4:"user";s:8:"redirect";s:5:"login";}s:9:"myAccount";a:1:{s:4:"page";s:11:"{{ :page }}";}s:39:"goldtestCustomerProfile customerProfile";a:0:{}}}

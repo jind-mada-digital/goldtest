@@ -1,0 +1,32 @@
+1698662719a:1:{s:25:"cart/table/grandtotal.htm";a:5:{s:8:"fileName";s:25:"cart/table/grandtotal.htm";s:7:"content";s:485:"<tr class="mall-cart__grand-total">
+    <td colspan="5">
+        {% if __SELF__.showShipping %}
+            {{ 'offline.mall::frontend.grand_total' | trans }}
+        {% else %}
+            {{ 'offline.mall::frontend.total' | trans }}
+        {% endif %}
+    </td>
+    <td class="text-right">
+        {% if __SELF__.showShipping %}
+            {{ totals.totalPostTaxes | money }}
+        {% else %}
+            {{ totals.productPostTaxes | money }}
+        {% endif %}
+    </td>
+</tr>
+";s:5:"mtime";i:1573825314;s:6:"markup";s:484:"<tr class="mall-cart__grand-total">
+    <td colspan="5">
+        {% if __SELF__.showShipping %}
+            {{ 'offline.mall::frontend.grand_total' | trans }}
+        {% else %}
+            {{ 'offline.mall::frontend.total' | trans }}
+        {% endif %}
+    </td>
+    <td class="text-right">
+        {% if __SELF__.showShipping %}
+            {{ totals.totalPostTaxes | money }}
+        {% else %}
+            {{ totals.productPostTaxes | money }}
+        {% endif %}
+    </td>
+</tr>";s:4:"code";N;}}

@@ -1,0 +1,9 @@
+1698665476a:1:{s:20:"mainmenu/default.htm";a:5:{s:8:"fileName";s:20:"mainmenu/default.htm";s:7:"content";s:145:"{% if __SELF__.menuItems %}
+    <ul class="navbar-nav">
+        {% partial __SELF__ ~ "::items" items=__SELF__.menuItems %}
+    </ul>
+{% endif %}";s:5:"mtime";i:1563962278;s:6:"markup";s:145:"{% if __SELF__.menuItems %}
+    <ul class="navbar-nav">
+        {% partial __SELF__ ~ "::items" items=__SELF__.menuItems %}
+    </ul>
+{% endif %}";s:4:"code";N;}}

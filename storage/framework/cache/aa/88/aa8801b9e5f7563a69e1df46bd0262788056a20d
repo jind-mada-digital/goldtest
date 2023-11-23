@@ -1,0 +1,51 @@
+1698666280a:1:{s:11:"footer.yaml";a:7:{s:8:"fileName";s:11:"footer.yaml";s:7:"content";s:1143:"items:
+    -
+        title: Contact
+        nesting: '0'
+        type: static-page
+        url: ''
+        code: contact
+        reference: about
+        cmsPage: ''
+        replace: '0'
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Horaires
+        type: url
+        url: 'https://www.google.ch/search?q=goldtest+horaires'
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '1'
+    -
+        title: 'Conditions générale de vente'
+        nesting: '0'
+        type: static-page
+        url: ''
+        code: ''
+        reference: conditions-generales-de-vente
+        cmsPage: ''
+        replace: '0'
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Chèques Cadeaux - FAQ'
+        nesting: '0'
+        type: static-page
+        url: ''
+        code: ''
+        reference: cheques-cadeaux-faq
+        cmsPage: ''
+        replace: '0'
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: Footer
+";s:5:"mtime";i:1579271058;s:6:"markup";N;s:4:"code";N;s:4:"name";N;s:5:"items";a:0:{}}}

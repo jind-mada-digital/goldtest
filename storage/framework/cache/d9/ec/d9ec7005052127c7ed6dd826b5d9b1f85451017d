@@ -1,0 +1,42 @@
+1698662719a:1:{s:22:"cart/table/entries.htm";a:5:{s:8:"fileName";s:22:"cart/table/entries.htm";s:7:"content";s:997:"<div class="mall-cart__wrapper">
+    <div class="mall-table-overflow" style="overflow-y: auto">
+        <table class="mall-cart__table table table-striped">
+            <thead>
+            {% partial __SELF__ ~ '::table/header' %}
+            </thead>
+            <tbody>
+            {% for product in cart.products %}
+                {% partial __SELF__ ~ '::table/entry' product=product %}
+            {% endfor %}
+
+            {% partial __SELF__ ~ '::table/total'      totals=cart.totals %}
+            {% partial __SELF__ ~ '::table/discounts'  discounts=cart.totals.appliedDiscounts %}
+            {% partial __SELF__ ~ '::table/shipping'   shipping=cart.totals.shippingTotal %}
+            {% partial __SELF__ ~ '::table/payment'    payment=cart.totals.paymentTotal %}
+            {% partial __SELF__ ~ '::table/grandtotal' totals=cart.totals %}
+            {# {% partial __SELF__ ~ '::table/taxes'      taxes=cart.totals.taxes %} #}
+            </tbody>
+        </table>
+    </div>
+</div>
+";s:5:"mtime";i:1575379416;s:6:"markup";s:996:"<div class="mall-cart__wrapper">
+    <div class="mall-table-overflow" style="overflow-y: auto">
+        <table class="mall-cart__table table table-striped">
+            <thead>
+            {% partial __SELF__ ~ '::table/header' %}
+            </thead>
+            <tbody>
+            {% for product in cart.products %}
+                {% partial __SELF__ ~ '::table/entry' product=product %}
+            {% endfor %}
+
+            {% partial __SELF__ ~ '::table/total'      totals=cart.totals %}
+            {% partial __SELF__ ~ '::table/discounts'  discounts=cart.totals.appliedDiscounts %}
+            {% partial __SELF__ ~ '::table/shipping'   shipping=cart.totals.shippingTotal %}
+            {% partial __SELF__ ~ '::table/payment'    payment=cart.totals.paymentTotal %}
+            {% partial __SELF__ ~ '::table/grandtotal' totals=cart.totals %}
+            {# {% partial __SELF__ ~ '::table/taxes'      taxes=cart.totals.taxes %} #}
+            </tbody>
+        </table>
+    </div>
+</div>";s:4:"code";N;}}
