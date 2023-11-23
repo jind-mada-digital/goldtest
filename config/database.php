@@ -54,7 +54,7 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => 'hrj.myd.infomaniak.com',
+            'host'      => 'localhost',
             'port'      => 3306,
             'database'  => 'hrj_goldtest2020',
             'username'  => 'hrj_goldtest20',
