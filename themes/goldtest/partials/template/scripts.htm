@@ -29,17 +29,33 @@
 ]|theme }}.js"></script>
 
 <script>
+    let lastVisitDate = localStorage.getItem('gt_lastVisitDate');
+    if (!lastVisitDate) {
+        const today = new Date();
+        lastVisitDate = today.toISOString();
+        localStorage.setItem('gt_lastVisitDate', lastVisitDate);
+    }
+
     $(document).ready(function() {
-        Swal.fire({
-            title: null,
-            html: `<img src="{{ 'assets/images/annoncegeneral_001.png'|theme }}" width="100%"/>`,
-            width: 750,
-            showCloseButton: true,
-            showCancelButton: false,
-            showConfirmButton: false,
-            confirmButtonColor: '#d33',
-            confirmButtonText: 'Fermer',
-        });
+        const today = new Date();
+        let lastVisitDate = new Date(localStorage.getItem('gt_lastVisitDate'));
+        if ( today.getDate() !== lastVisitDate.getDate() ) {
+            // Show the popup only on the first visit of the day
+            localStorage.setItem('gt_lastVisitDate', today.toISOString());
+        }
+
+        if( $('title') == 'Login' ){
+            Swal.fire({
+                title: null,
+                html: `<img src="{{ 'assets/images/annoncegeneral_001.png'|theme }}" width="100%"/>`,
+                width: 750,
+                showCloseButton: true,
+                showCancelButton: false,
+                showConfirmButton: false,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Fermer',
+            });
+        }
     });
 </script>
 
