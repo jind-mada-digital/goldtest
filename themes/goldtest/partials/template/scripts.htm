@@ -44,7 +44,7 @@
             localStorage.setItem('gt_lastVisitDate', today.toISOString());
         }
 
-        if( $('title') == 'Login' ){
+        if( $('title').text() == 'Login' ){
             Swal.fire({
                 title: null,
                 html: `<img src="{{ 'assets/images/annoncegeneral_001.png'|theme }}" width="100%"/>`,
