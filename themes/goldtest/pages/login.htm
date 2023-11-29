@@ -11,3 +11,18 @@ redirect = "myaccount"
 redirect = "/account"
 ==
 {% component 'signUp' %}
+
+<script>
+    $(document).ready(function() {
+      Swal.fire({
+        title: null,
+        html: `<img src="{{ 'assets/images/annoncegeneral_001.png'|theme }}" width="100%"/>`,
+        width: 750,
+        showCloseButton: true,
+        showCancelButton: false,
+        showConfirmButton: false,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Fermer',
+      });
+    });
+</script>
