@@ -31,3 +31,12 @@ _ide_helper.php
 .DS_Store
 package-lock.json
 /node_modules
+
+# Ignore storage files that may contain user-uploaded content, logs, and cache
+/storage/temp/*
+/storage/cms/*
+/storage/framework/*
+/storage/app/*
+/storage/logs/*
+storage/*.log
+
