@@ -19,11 +19,15 @@
         {% set cssClasses = isSelected ? 'mall-filter__option--selected' : '' %}
 
         {% if isColor %}
-            {% set cssClasses = cssClasses ~ ' mall-filter__option-color' %}
+            
+            {% if false %}
+                {% set cssClasses = cssClasses ~ ' mall-filter__option-color' %}
+            {% endif %}
 
             {% set hexaColor = '' %}
 
             {% for option in property.options if option.value == value.value  %}
+                {% set colorName = value.value %}
                 {% set hexaColor = option.color %}
             {% endfor %}
         {% endif %}
@@ -38,7 +42,8 @@
                     {{ isSelected ? 'checked' }} >
 
             {% if isColor %}
-                <span style="background-color: {{ hexaColor }}"></span>
+                <!-- <span style="background-color: {{ hexaColor }}"></span> -->
+                <span>{{ value.display_value|_ }}</span>
             {% else %}
                 {{ value.display_value|_ }} {{ property.unit }}
             {% endif %}
