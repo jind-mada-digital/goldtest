@@ -2,7 +2,6 @@
 ==
 
 <script src="{{ [
-    'assets/vendor/jquery/jquery-3.4.1.min.js',
 
     '@framework',
     '@framework.extras',
@@ -29,25 +28,52 @@
 ]|theme }}.js"></script>
 
 <script>
-    let lastVisitDate = localStorage.getItem('gt_lastVisitDate');
+    let lastVisitDate = localStorage.getItem('goldtest_lastVisitDate');
     if (!lastVisitDate) {
         const today = new Date();
-        lastVisitDate = today.toISOString();
-        localStorage.setItem('gt_lastVisitDate', lastVisitDate);
+        lastVisitDate = today.toLocaleDateString();
+        localStorage.setItem('goldtest_lastVisitDate', lastVisitDate);
     }
+    // Get the user's browser language
+    const userLanguage = navigator.language.substring(0, 2);
+
+  	const languagePaths = ['/fr', '/en', '/de', '/it']; // Better dynamic
+    const targetPath = ['/club5', '/about-goldtest', '/league5', '/conditions-generales-de-vente']; // better dynamic
+
+    const isHome = () => {
+        return languagePaths.filter( path => path == window.location.pathname ).length > 0;
+    };
+
+    const isFrontPage = () => {
+        return targetPath.some( path => window.location.pathname.endsWith( path ) );
+    };
 
     $(document).ready(function() {
+
         const today = new Date();
-        let lastVisitDate = new Date(localStorage.getItem('gt_lastVisitDate'));
-        if ( today.getDate() !== lastVisitDate.getDate() ) {
-            // Show the popup only on the first visit of the day
-            localStorage.setItem('gt_lastVisitDate', today.toISOString());
+        let lastVisitDate = localStorage.getItem('goldtest_lastVisitDate');
+
+        localStorage.setItem('goldtest_lastVisitDate', today.toLocaleDateString());
+
+        
+		  
+        // Check if the current page is the home page
+        const currentPath = window.location.pathname;
+
+        const currentDate = new Date();
+        const endDate = new Date('2024-03-01'); 
+
+        if ( currentDate < endDate ) {
+            popupImage = 'assets/images/goldtest-st-valentin-offer-2024.jpg';
+        }
+        else{
+            popupImage = 'assets/images/annoncegeneral_001.png';
         }
 
-        if( $('title').text() == 'Login' ){
+        if ( isHome() || isFrontPage() ) {
             Swal.fire({
                 title: null,
-                html: `<img src="{{ 'assets/images/annoncegeneral_001.png'|theme }}" width="100%"/>`,
+                html: `<img src="{{ '${popupImage}'|theme }}" width="100%"/>`,
                 width: 750,
                 showCloseButton: true,
                 showCancelButton: false,
@@ -56,6 +82,8 @@
                 confirmButtonText: 'Fermer',
             });
         }
+
+        
     });
 </script>
 
