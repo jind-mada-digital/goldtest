@@ -30,21 +30,19 @@
                     {% set hexaColor = option.color %}
                 {% endfor %}
             {% endif %}
-            
-            {% if value.variant.published or isColor or item.property.slug == 'genre' %}
+
+  			{% if value.variant.published or isColor or item.property.slug == 'genre' %}
             <a href="#" data-id="{{ value.hashId }}"
-               class="js-mall-property-selector mall-filter__option {{ cssClasses }}" data-published="{{ value.variant.published }}" title="{{ value.variant.published }}">
+               class="js-mall-property-selector mall-filter__option {{ cssClasses }}">
                 {% if isColor %}
                     <span style="background-color: {{ hexaColor }}"></span>
                 {% else %}
-                    {{ value.value|_ }} {{ item.property.unit }} {{ value.variant.published }}
+                    {{ value.value|_ }} {{ item.property.unit }}
                 {% endif %}
             </a>
-            {% endif %}
-            
+  			{% endif %}
         {% endfor %}
 
         <div class="clearfix"></div>
     {% endif %}
 </div>
-
