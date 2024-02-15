@@ -38,9 +38,14 @@ function onStart() {
     <link href="{{ ['assets/scss/theme.scss']|theme }}.css" rel="stylesheet">
     <link href="{{ 'assets/vendor/sweetalert2/sweetalert2.min.css'|theme }}" rel="stylesheet">
     {% styles %}
+    
+    <script src="{{ 'assets/vendor/jquery/jquery-3.4.1.min.js'|theme }}"></script>
+    
     {% component 'mallDependencies' %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154465717-1"></script>
+    
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154465717-1"></script> 
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -48,7 +53,11 @@ function onStart() {
     
       gtag('config', 'UA-154465717-1');
     </script>
+    -->
+    
     <!-- Facebook Pixel Code -->
+    
+    <!--
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -64,6 +73,8 @@ function onStart() {
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=573860596550639&ev=PageView&noscript=1"
     /></noscript>
+    -->
+    
     <!-- End Facebook Pixel Code -->
 
 </head>
