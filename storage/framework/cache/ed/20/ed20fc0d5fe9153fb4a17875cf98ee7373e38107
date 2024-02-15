@@ -1,5 +1,0 @@
-1698663703a:1:{s:26:"myaccount/pages/orders.htm";a:5:{s:8:"fileName";s:26:"myaccount/pages/orders.htm";s:7:"content";s:84:"<h2>{{ 'offline.mall::frontend.orders' | trans }}</h2>
-
-{% component 'ordersList' %}";s:5:"mtime";i:1574250004;s:6:"markup";s:84:"<h2>{{ 'offline.mall::frontend.orders' | trans }}</h2>
-
-{% component 'ordersList' %}";s:4:"code";N;}}

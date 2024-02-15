@@ -1,5 +1,0 @@
-1698665476a:1:{s:20:"orderslist/empty.htm";a:5:{s:8:"fileName";s:20:"orderslist/empty.htm";s:7:"content";s:82:"<div class="mall-callout">
-    {{ 'offline.mall::frontend.empty' | trans }}
-</div>";s:5:"mtime";i:1574256130;s:6:"markup";s:82:"<div class="mall-callout">
-    {{ 'offline.mall::frontend.empty' | trans }}
-</div>";s:4:"code";N;}}

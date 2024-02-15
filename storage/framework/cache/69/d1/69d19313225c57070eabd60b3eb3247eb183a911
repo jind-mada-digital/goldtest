@@ -1,5 +1,0 @@
-1698663361a:1:{s:29:"myaccount/pages/addresses.htm";a:5:{s:8:"fileName";s:29:"myaccount/pages/addresses.htm";s:7:"content";s:91:"<h2>{{ 'offline.mall::frontend.address_list' | trans }}</h2>
-
-{% component 'addressList' %}";s:5:"mtime";i:1574250004;s:6:"markup";s:91:"<h2>{{ 'offline.mall::frontend.address_list' | trans }}</h2>
-
-{% component 'addressList' %}";s:4:"code";N;}}

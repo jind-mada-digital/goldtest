@@ -1,5 +1,0 @@
-1698665476a:1:{s:22:"checkout/datalayer.htm";a:5:{s:8:"fileName";s:22:"checkout/datalayer.htm";s:7:"content";s:82:"<script>
-    dataLayer.push({{ __SELF__.dataLayer | json_encode | raw}})
-</script>";s:5:"mtime";i:1574084542;s:6:"markup";s:82:"<script>
-    dataLayer.push({{ __SELF__.dataLayer | json_encode | raw}})
-</script>";s:4:"code";N;}}

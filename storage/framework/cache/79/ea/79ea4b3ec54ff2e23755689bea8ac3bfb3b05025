@@ -1,6 +1,0 @@
-1698665476a:1:{s:21:"product/datalayer.htm";a:5:{s:8:"fileName";s:21:"product/datalayer.htm";s:7:"content";s:70:"<script>
-    dataLayer.push({{ __SELF__.dataLayer | raw }})
-</script>
-";s:5:"mtime";i:1573643508;s:6:"markup";s:69:"<script>
-    dataLayer.push({{ __SELF__.dataLayer | raw }})
-</script>";s:4:"code";N;}}

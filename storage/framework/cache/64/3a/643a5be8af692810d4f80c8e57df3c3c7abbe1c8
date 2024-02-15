@@ -1,6 +1,0 @@
-1698665476a:1:{s:34:"paymentmethodselector/selector.htm";a:5:{s:8:"fileName";s:34:"paymentmethodselector/selector.htm";s:7:"content";s:101:"<h2>{{ 'offline.mall::frontend.payment_method' | trans }}</h2>
-
-{% partial __SELF__ ~ '::methods' %}
-";s:5:"mtime";i:1574085312;s:6:"markup";s:100:"<h2>{{ 'offline.mall::frontend.payment_method' | trans }}</h2>
-
-{% partial __SELF__ ~ '::methods' %}";s:4:"code";N;}}
