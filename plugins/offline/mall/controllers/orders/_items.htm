@@ -77,7 +77,7 @@
         <td colspan="3">
             <span>
                 <?= e(trans('offline.mall::lang.common.discount')) ?>:
-                <?= e($entry['discount']['name']) ?>
+                <?= e($entry['discount']['discount']['name']) ?>
             </span>
         </td>
         <td class="text-right">
@@ -95,7 +95,7 @@
                 <?= e(trans('offline.mall::lang.common.shipping')) ?>:
                 <?= e($order['shipping']['method']['name']) ?>
                 <?php if($order['shipping']['appliedDiscount']): ?>
-                (<?= e($order['shipping']['appliedDiscount']['discount']['name']) ?>,
+                (<?= e($order['shipping']['appliedDiscount']['discount']['discount']['name']) ?>,
                 <?= e($money->format($order['shipping']['appliedDiscount']['savings'])) ?>)
                 <?php endif; ?>
             </span>

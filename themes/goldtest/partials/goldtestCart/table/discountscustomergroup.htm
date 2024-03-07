@@ -1,0 +1,11 @@
+{% for entry in discountscustomergroup %}
+<tr class="mall-cart__discount">
+    <td colspan="5">
+        {{ entry.discount.name }}
+        (-{{ entry.discount.discount }}%)
+    </td>
+    <td class="text-right">
+        {{ entry.savings | money }}
+    </td>
+</tr>
+{% endfor %}

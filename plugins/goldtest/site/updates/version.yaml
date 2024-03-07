@@ -13,3 +13,12 @@
 1.0.6:
     - 'Add height and weight'
     - add_customer_height_weight.php
+1.0.7:
+    - 'Created table goldtest_discount_trigger'
+    - builder_table_create_goldtest_site.php
+1.0.8:
+    - 'Updated table goldtest_site_discount_trigger'
+    - builder_table_update_goldtest_site_discount_trigger.php
+1.0.9:
+    - 'Drop table goldtest_site_discount_trigger'
+    - builder_table_delete_goldtest_site_discount_trigger.php

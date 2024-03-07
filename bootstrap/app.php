@@ -12,7 +12,7 @@
 */
 
 $app = new October\Rain\Foundation\Application(
-    realpath(__DIR__.'/../')
+    realpath(__DIR__ . '/../')
 );
 
 /*
@@ -33,7 +33,7 @@ $app->singleton(
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    October\Rain\Foundation\Console\Kernel::class
+    October\Rain\Foundation\Console\Kernel::class,
 );
 
 $app->singleton(

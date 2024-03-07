@@ -1,10 +1,16 @@
 <!-- Individual values -->
 <?php foreach ($currencies as $currency): ?>
-<input
-        type="hidden"
-        name="<?= $field->getName('MallPrice['.$currency->id.']') ?>"
-        value="<?= e($this->getPriceValue($currency->id)) ?>"
-        data-currency-value="<?= $currency->code ?>"
-<?= $field->getAttributes() ?>
+<?php if(collect(October\Rain\Html\Helper::nameToArray($field->getName()))->filter(function($value){
+        return is_numeric($value);
+})->count()): ?>
+<input type="hidden" name="<?= $field->getName().''.'[_'.$currency->id.']' ?>"
+        value="<?= e($this->getPriceValue($currency->id)) ?>" data-currency-value="<?= $currency->code ?>"
+        <?=$field->getAttributes() ?>
 />
+<?php else: ?>
+<input type="hidden" name="<?= $field->getName('MallPrice['.$currency->id.']') ?>"
+        value="<?= e($this->getPriceValue($currency->id)) ?>" data-currency-value="<?= $currency->code ?>"
+        <?=$field->getAttributes() ?>
+/>
+<?php endif ?>
 <?php endforeach ?>

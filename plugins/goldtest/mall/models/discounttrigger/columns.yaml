@@ -1,0 +1,26 @@
+columns:
+    trigger:
+        label: trigger
+        type: text
+        searchable: true
+    code:
+        label: code
+        type: text
+        searchable: true
+    totals_to_reach:
+        label: 'offline.mall::lang.discounts.total_to_reach'
+        type: partial
+        path: $/goldtest/mall/models/discounttrigger/_totals_to_reach.htm
+        searchable: false
+        sortable: false
+        align: right
+    product:
+        label: product
+        relation: product
+        select: name
+    products:
+        label: products
+        type: partial
+        searchable: true
+        sortable: false
+        path: $/goldtest/mall/models/discounttrigger/_products.htm

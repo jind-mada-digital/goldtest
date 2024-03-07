@@ -42,4 +42,9 @@ class CustomerGroup extends Model
 
         return $this->prices->where('currency_id', $currency)->first() ?? $this->nullPrice();
     }
+
+    public function getPercentageDecimalAttribute()
+    {
+        return (float)$this->discount / 100;
+    }
 }

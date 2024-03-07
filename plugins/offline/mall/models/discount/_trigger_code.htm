@@ -1,0 +1,9 @@
+<ul class="p-l">
+    <?php foreach ($record->discount_triggers as $discount_trigger): ?>
+    <?php if($discount_trigger->trigger == 'code'): ?>
+    <li>
+        <?= e($discount_trigger->code) ?>
+    </li>
+    <?php endif ?>
+    <?php endforeach ?>
+</ul>

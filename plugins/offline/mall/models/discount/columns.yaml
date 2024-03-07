@@ -22,14 +22,31 @@ columns:
         type: text
         searchable: true
         sortable: true
-    trigger:
+    discount_trigger_trigger:
         label: 'offline.mall::lang.discounts.trigger'
-        type: text
-        searchable: true
-        sortable: true
-    code:
-        label: 'offline.mall::lang.discounts.code'
-        type: text
-        searchable: true
-        sortable: true
+        type: partial
+        searchable: false
+        sortable: false
+        clickable: false
+        path: $/offline/mall/models/discount/_trigger.htm
+    discount_trigger_code:
+        label: 'goldtest.mall::lang.discounts.code'
+        type: partial
+        searchable: false
+        sortable: false
+        path: $/offline/mall/models/discount/_trigger_code.htm
+        clickable: false
+    discount_trigger_product:
+        label: 'goldtest.mall::lang.discounts.products'
+        type: partial
+        searchable: false
+        sortable: false
+        path: $/offline/mall/models/discount/_trigger_product.htm
+        clickable: false
+    discount_trigger_total_to_reach:
+        label: 'goldtest.mall::lang.discounts.discount_triggers.columns.total_to_reach'
+        type: partial
+        searchable: false
+        sortable: false
+        path: $/offline/mall/models/discount/_trigger_total_to_reach.htm
         clickable: false

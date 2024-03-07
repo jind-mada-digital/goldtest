@@ -1,0 +1,22 @@
+Vérifier si la remise appliquée contient [product,total,products], alors enlever la remise type [code]
+=> Cart -- Model -- checkPromocodeAndDiscounts
+
+Ajouter code de remise 
+=> plugins\offline\mall\classes\traits\cart\Discounts.php applyDiscountByCode
+
+Appliquer discount 
+=> plugins\offline\mall\classes\cart\DiscountApplier.php apply
+
+Appliquer multi-discounts
+=> plugins\offline\mall\classes\cart\DiscountApplier.php applyMany
+
+Check discount code appliqué et merge tous les discounts disponibles
+=> plugins\offline\mall\classes\totals\TotalsCalculator.php applyTotalDiscounts
+
+
+
+--------------------------------  condition d'utilisation code -----------------------------------------
+1- saisie code
+2- verifie code [existe, utilisation en cour, seul code dans un panier]
+3- verifie les cocoditions êtres applicables
+4- ajoute code

@@ -1,4 +1,6 @@
-<?php namespace Goldtest\Mall;
+<?php
+
+namespace Goldtest\Mall;
 
 use Backend\Classes\NavigationManager;
 use Backend\Widgets\Filter as FilterWidget;
@@ -14,6 +16,7 @@ use Goldtest\Mall\Classes\DefaultMoney;
 use Goldtest\Mall\Classes\MySQLIndex;
 use Goldtest\Mall\Classes\SixSaferPayPaymentProvider;
 use Goldtest\Site\Models\School;
+use Illuminate\Support\Facades\Validator;
 use OFFLINE\Mall\Classes\Customer\SignUpHandler;
 use OFFLINE\Mall\Classes\Index\Filebase;
 use OFFLINE\Mall\Classes\Index\Index;
@@ -35,6 +38,7 @@ use OFFLINE\Mall\Models\ShippingMethod;
 use OFFLINE\Mall\Models\Variant;
 use October\Rain\Exception\ApplicationException;
 use October\Rain\Support\Arr;
+use OFFLINE\Mall\Models\Discount;
 use RainLab\Translate\Models\Message;
 use Redirect;
 use Request;
@@ -103,6 +107,14 @@ class Plugin extends PluginBase
         $this->overrideMallOrdersList();
 
         $this->addValidationsOnCheckout();
+
+        Validator::extend('requiredDiscountTrigger', function ($attribute, $value, $parameters) {
+            $post = post(collect($parameters)->first());
+            for ($k = 1; $k < count($parameters); $k++) {
+                $post = array_get($post, $parameters[$k], []);
+            }
+            return count(array_get($post, $attribute, [])) > 0;
+        });
     }
 
     public function register()
@@ -110,6 +122,8 @@ class Plugin extends PluginBase
         $this->app->extend(SignUpHandler::class,  function ($service, $app) {
             return new GoldtestSignUpHandler();
         });
+        //dd($this->app);
+        $this->registerConsoleCommand('discount:refact', 'App\Console\Commands\DiscounRefact');
     }
 
     public function registerComponents()
@@ -119,6 +133,7 @@ class Plugin extends PluginBase
             Components\InitCheckout::class => 'goldtestInitCheckout',
             Components\DiscountApplier::class => 'goldtestDiscountApplier',
             Components\CustomerProfile::class => 'goldtestCustomerProfile',
+            Components\Cart::class => 'goldtestCart',
         ];
     }
 
@@ -201,11 +216,11 @@ class Plugin extends PluginBase
     {
         return function ($slug) use ($model) {
             return $model->property_values()
-                    ->whereHas('property', function ($query) use ($slug) {
-                        $query->where('slug', $slug);
-                    })
-                    ->first()
-                    ->value ?? '';
+                ->whereHas('property', function ($query) use ($slug) {
+                    $query->where('slug', $slug);
+                })
+                ->first()
+                ->value ?? '';
         };
     }
 
@@ -380,7 +395,7 @@ class Plugin extends PluginBase
                 return;
             }
 
-            $fields =& $form->tabs['fields'];
+            $fields = &$form->tabs['fields'];
 
             if (isset($fields['message'])) {
                 $fields['message_raw'] = $fields['message'];

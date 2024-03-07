@@ -397,12 +397,15 @@
         'shipping_guaranteed_days_to_delivery' => 'Jours garantis de livraison',
         'section_type'                         => 'Que fait cette réduction ?',
         'section_trigger'                      => 'Quand cette réduction est-elle applicable ?',
+        'customer_group'                       => 'Groupes de client',
+        'valid_from'                           => 'Valable à partir de',
         'types'                                => [
             'fixed_amount' => 'Montant fixé',
             'rate'         => 'Taux',
             'shipping'     => 'Envoi alternatif',
         ],
         'triggers'                             => [
+            ''=> ' --- Choissez une valeur ---',
             'total'   => 'Le total de la commande est atteint',
             'code'    => 'Le code de réduction est entré',
             'product' => 'Un produit spécifique est présent dans le panier',

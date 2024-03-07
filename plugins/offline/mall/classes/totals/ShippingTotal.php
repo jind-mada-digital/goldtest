@@ -3,6 +3,7 @@
 namespace OFFLINE\Mall\Classes\Totals;
 
 use Carbon\Carbon;
+use Goldtest\Mall\Models\DiscountTrigger;
 use OFFLINE\Mall\Classes\Cart\DiscountApplier;
 use OFFLINE\Mall\Models\Discount;
 use OFFLINE\Mall\Models\ShippingMethod;
@@ -57,7 +58,7 @@ class ShippingTotal implements \JsonSerializable
 
     protected function calculatePreTax()
     {
-        if ( ! $this->method) {
+        if (!$this->method) {
             return 0;
         }
 
@@ -72,7 +73,7 @@ class ShippingTotal implements \JsonSerializable
 
     protected function calculateTaxes(): float
     {
-        if ( ! $this->method) {
+        if (!$this->method) {
             return 0;
         }
 
@@ -91,7 +92,7 @@ class ShippingTotal implements \JsonSerializable
 
     protected function calculateTotal(): float
     {
-        if ( ! $this->method) {
+        if (!$this->method) {
             return 0;
         }
 
@@ -141,14 +142,14 @@ class ShippingTotal implements \JsonSerializable
             return ShippingMethod::noShippingRequired();
         }
 
-        if ( ! $this->appliedDiscount) {
+        if (!$this->appliedDiscount) {
             return $this->method;
         }
 
         $method = $this->method->replicate(['id', 'name']);
-
+        //dd($this->appliedDiscount['discount']);
         $discount     = $this->appliedDiscount['discount'];
-        $method->name = $discount->shipping_description;
+        $method->name = $discount->discount->shipping_description;
         $method->setRelation('prices', $discount->shipping_prices);
 
         return $method;
@@ -156,17 +157,30 @@ class ShippingTotal implements \JsonSerializable
 
     private function applyDiscounts(int $price): ?float
     {
-        $discounts = Discount::whereIn('trigger', ['total', 'product'])
-            ->where('type', 'shipping')
+        $discounts = DiscountTrigger::select([
+            'goldtest_mall_discount_trigger.*',
+            'offline_mall_discounts.name',
+            'offline_mall_discounts.valid_from',
+            'offline_mall_discounts.expires',
+            'offline_mall_discounts.type',
+            'offline_mall_discounts.rate',
+            'offline_mall_discounts.max_number_of_usages',
+            'offline_mall_discounts.number_of_usages',
+            'offline_mall_discounts.shipping_description',
+            'offline_mall_discounts.shipping_guaranteed_days_to_delivery'
+        ])->with(['discount'])
+            ->join('offline_mall_discounts', 'goldtest_mall_discount_trigger.discount_id', 'offline_mall_discounts.id')
+            ->whereIn('goldtest_mall_discount_trigger.trigger', ['total', 'product','products']) //j'ai mis products
+            ->where('offline_mall_discounts.type', 'shipping')
             ->where(function ($q) {
-                $q->whereNull('valid_from')
-                    ->orWhere('valid_from', '<=', Carbon::now());
+                $q->whereNull('offline_mall_discounts.valid_from')
+                    ->orWhere('offline_mall_discounts.valid_from', '<=', Carbon::now());
             })->where(function ($q) {
-                $q->whereNull('expires')
-                    ->orWhere('expires', '>', Carbon::now());
+                $q->whereNull('offline_mall_discounts.expires')
+                    ->orWhere('offline_mall_discounts.expires', '>', Carbon::now());
             })->get();
-
-        $codeDiscount = $this->totals->getInput()->discounts->where('type', 'shipping')->first();
+            
+        $codeDiscount = $this->totals->getInput()->discounts->where('discount.type', 'shipping')->first();
         if ($codeDiscount) {
             $discounts->push($codeDiscount);
         }

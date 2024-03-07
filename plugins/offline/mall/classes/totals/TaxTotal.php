@@ -5,6 +5,7 @@ namespace OFFLINE\Mall\Classes\Totals;
 use JsonSerializable;
 use OFFLINE\Mall\Classes\Utils\Money;
 use OFFLINE\Mall\Models\Tax;
+use RainLab\User\Facades\Auth;
 
 class TaxTotal implements JsonSerializable
 {

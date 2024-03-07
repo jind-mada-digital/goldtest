@@ -1,0 +1,23 @@
+{% for entry in discounts %}
+<tr class="mall-cart__discount">
+    <td colspan="5">
+        <div>
+            <span class="d-block">
+                {{ entry.discount.discount.name }}
+                {% if entry.discount.code %}
+                ({{ entry.discount.code }})
+                {% endif %}
+            </span>
+            {% if entry.discount.code %}
+            <a href="javascript:;" class="d-block font-size-xs js-mall-remove-code-discount text-black-50 text-capitalize"
+                data-id="{{entry.discount.hashId}}">
+                {{ 'goldtest.mall::lang.frontend.discount_applied.remove_code' | trans }}
+            </a>
+            {% endif %}
+        </div>
+    </td>
+    <td class="text-right">
+        {{ entry.savings | money }}
+    </td>
+</tr>
+{% endfor %}

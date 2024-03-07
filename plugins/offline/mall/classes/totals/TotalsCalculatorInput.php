@@ -43,15 +43,17 @@ class TotalsCalculatorInput
      */
     public static function fromCart(Cart $cart)
     {
-        $cart->loadMissing(
+        $cart->loadMissing([
             'products',
             'products.data.taxes',
             'shipping_method',
             'shipping_method.taxes.countries',
             'shipping_method.rates',
-            'discounts'
-        );
-
+            'discounts',
+            'discounts.discount'
+        ]);
+        //dd('plugins\offline\mall\classes\totals\TotalsCalculatorInput.php::fromCart');
+        //dd($cart);
         $input                      = new self();
         $input->products            = $cart->products;
         $input->shipping_method     = $cart->shipping_method;

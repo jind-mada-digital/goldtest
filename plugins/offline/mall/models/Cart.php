@@ -1,12 +1,13 @@
-<?php namespace OFFLINE\Mall\Models;
+<?php
+
+namespace OFFLINE\Mall\Models;
 
 use Carbon\Carbon;
 use Cookie;
 use DB;
 use Event;
+use Goldtest\Mall\Models\DiscountTrigger;
 use Illuminate\Support\Arr;
-use OFFLINE\Mall\Models\Cart;
-use OFFLINE\Mall\Models\Discount;
 use Illuminate\Support\Collection;
 use Model;
 use October\Rain\Database\Traits\SoftDelete;
@@ -48,9 +49,11 @@ class Cart extends Model
     ];
     public $belongsToMany = [
         'discounts' => [
-            Discount::class,
+            DiscountTrigger::class,
             'table' => 'offline_mall_cart_discount',
-        ],
+            'key'      => 'cart_id',
+            'otherKey' => 'discount_id'
+        ]
     ];
     public $casts = [
         'shipping_address_same_as_billing' => 'boolean',
@@ -64,16 +67,19 @@ class Cart extends Model
 
     public static function boot()
     {
+        //dd('plugins\offline\mall\models\Cart.php boot');
         parent::boot();
+        //dd('plugins\offline\mall\models\Cart.php boot');
         static::saving(function (self $cart) {
             // Make sure the selected shipping method is available for the new address(es).
             if ($cart->shipping_method_id !== null && $cart->isDirty('shipping_address_id')) {
                 $availableMethods = ShippingMethod::getAvailableByCart($cart);
-                if ( ! $availableMethods->pluck('id')->contains($cart->shipping_method_id)) {
+                if (!$availableMethods->pluck('id')->contains($cart->shipping_method_id)) {
                     $cart->shipping_method_id = ShippingMethod::getDefault()->id;
                 }
             }
         });
+        //dd('plugins\offline\mall\models\Cart.php boot');
     }
 
     public function setShippingMethod(?ShippingMethod $method)
@@ -109,6 +115,7 @@ class Cart extends Model
 
     public function getTotalsAttribute()
     {
+        //dd('plugins\offline\mall\models\Cart.php getTotalsAttribute');
         if ($this->totalsCached) {
             return $this->totalsCached;
         }
@@ -134,6 +141,8 @@ class Cart extends Model
 
     public function totals(): TotalsCalculator
     {
+        //dd('plugins\offline\mall\models\Cart.php::totals');
+        //dd(TotalsCalculatorInput::fromCart($this));
         return $this->totalsCached = new TotalsCalculator(TotalsCalculatorInput::fromCart($this));
     }
 
@@ -192,7 +201,7 @@ class Cart extends Model
 
             $query->when($hasCustomFieldOption, function ($query) use ($value) {
                 $query->where('custom_field_option_id', $value->custom_field_option_id);
-            })->when(! $hasCustomFieldOption, function ($query) use ($value) {
+            })->when(!$hasCustomFieldOption, function ($query) use ($value) {
                 $query->where('value', $value->value);
             });
         }
@@ -206,11 +215,12 @@ class Cart extends Model
      */
     public function validateShippingMethod()
     {
-        if ( ! $this->shipping_method_id) {
+        if (!$this->shipping_method_id) {
             return true;
         }
-
+        //dd('plugins\offline\mall\models\Cart.php validateShippingMethod');
         $available = ShippingMethod::getAvailableByCart($this);
+        //dd('init Cart validateShippingMethod');
         if ($available->pluck('id')->contains($this->shipping_method_id)) {
             return true;
         }
@@ -274,43 +284,86 @@ class Cart extends Model
         Session::forget('mall.shipping.enforced');
     }
 
-    public function checkPromocodeAndDiscounts() {
+    public function checkPromocodeAndDiscounts()
+    {
         /* CUSTOM logic to remove promocodes if implicitly discount is set to product or cart total*/
-        $nonCodeTriggersAvailableDiscountIds = Discount::whereIn('trigger', ['total', 'product'])
+        $nonCodeTriggersAvailableDiscountIds =
+            DiscountTrigger::select([
+                'goldtest_mall_discount_trigger.*',
+                'offline_mall_discounts.name',
+                'offline_mall_discounts.valid_from',
+                'offline_mall_discounts.expires',
+                'offline_mall_discounts.type',
+                'offline_mall_discounts.rate',
+                'offline_mall_discounts.max_number_of_usages',
+                'offline_mall_discounts.number_of_usages',
+                'offline_mall_discounts.shipping_description',
+                'offline_mall_discounts.shipping_guaranteed_days_to_delivery'
+            ])->with(['discount'])
+            ->join('offline_mall_discounts', 'goldtest_mall_discount_trigger.discount_id', 'offline_mall_discounts.id')
+            ->whereIn('goldtest_mall_discount_trigger.trigger', ['total', 'product', 'products']) // j'ai mis products(code manitra)
             ->where(function ($q) {
-                $q->whereNull('valid_from')
-                    ->orWhere('valid_from', '<=', Carbon::now());
+                $q->whereNull('offline_mall_discounts.valid_from')
+                    ->orWhere('offline_mall_discounts.valid_from', '<=', Carbon::now());
             })->where(function ($q) {
-                $q->whereNull('expires')
-                    ->orWhere('expires', '>', Carbon::now());
+                $q->whereNull('offline_mall_discounts.expires')
+                    ->orWhere('offline_mall_discounts.expires', '>', Carbon::now());
             })->lists('id');
-
-        $currentlyAppliedDiscountsIds = $this->totals->appliedDiscounts()->map(function($item) {
+        //dd($nonCodeTriggersAvailableDiscountIds);
+        //dd($this->totals->appliedDiscounts());
+        $currentlyAppliedDiscountsIds = $this->totals->appliedDiscounts()->map(function ($item) {
             return Arr::get($item, 'discount.id');
         })->toArray();
 
         $hasAppliedNonTriggerCode = false;
 
-        foreach($currentlyAppliedDiscountsIds as $id) {
-            if($hasAppliedNonTriggerCode) {
+        foreach ($currentlyAppliedDiscountsIds as $id) {
+            if ($hasAppliedNonTriggerCode) {
                 break;
             }
-            if(in_array($id, $nonCodeTriggersAvailableDiscountIds)) {
+            if (in_array($id, $nonCodeTriggersAvailableDiscountIds)) {
                 $hasAppliedNonTriggerCode = true;
             }
         }
 
         // if it has nonCodeTriggersAvailableDiscount then we need to remove promo code discount if it has
-        if($hasAppliedNonTriggerCode) {
-            $discounts = $this->discounts;
-            foreach($discounts as $item) {
-                if($item->trigger == 'code') {
+        /** modifier par manitra */
+        if ($hasAppliedNonTriggerCode) {
+            $discounts = collect($this->discounts);
+            $discounts_group = $discounts->groupBy('discount_id')->values();
+            $discounts_code = collect($discounts_group)->filter(function ($discount) {
+                return collect($discount)->contains('trigger', 'code') && collect($discount)->count() == 1;
+            })->map(function ($item) {
+                return collect($item)->first();
+            })->values();
+            foreach ($discounts_code as $item) {
+                if ($item->trigger == 'code') {
                     $this->discounts()->detach($item->id);
                 }
             }
         }
+        /** modifier par manitra */
         /*end*/
 
         return $hasAppliedNonTriggerCode;
+    }
+
+    private function detachDiscountUnsude()
+    {
+        collect($this->discounts)->filter(function ($discount) {
+            return !$this->totals->appliedDiscounts()->contains('discount.id', $discount->id);
+        })->map(function ($discount) {
+            if ($discount->trigger == 'code') {
+                $this->discounts()->detach($discount->id);
+            }
+        });
+    }
+
+    public function checkMaxDiscountCodeApply()
+    {
+        $this->detachDiscountUnsude();
+        $this->load(['discounts', 'discounts.discount']);
+        return ($this->customer && $this->customer->user && $this->customer->user->customer_group && $this->discounts()->count() > 1)
+            || ((!$this->customer || !$this->customer->user || !$this->customer->user->customer_group) && $this->discounts()->count() > 0);
     }
 }

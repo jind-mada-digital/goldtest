@@ -8,7 +8,7 @@ create:
     redirectClose: offline/mall/discounts
 update:
     title: 'offline.mall::lang.titles.discounts.update'
-    redirect: offline/mall/discounts
+    redirect: 'offline/mall/discounts/update/:id'
     redirectClose: offline/mall/discounts
 preview:
     title: 'offline.mall::lang.titles.discounts.preview'

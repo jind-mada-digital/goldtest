@@ -2,6 +2,7 @@
 
 namespace OFFLINE\Mall\Classes\Registration;
 
+use Goldtest\Mall\Models\DiscountTrigger;
 use October\Rain\Database\Relations\Relation;
 use OFFLINE\Mall\Models\CustomField;
 use OFFLINE\Mall\Models\CustomFieldOption;
@@ -24,6 +25,7 @@ trait BootRelations
             Product::MORPH_KEY            => Product::class,
             ImageSet::MORPH_KEY           => ImageSet::class,
             Discount::MORPH_KEY           => Discount::class,
+            DiscountTrigger::MORPH_KEY    => DiscountTrigger::class,
             CustomField::MORPH_KEY        => CustomField::class,
             PaymentMethod::MORPH_KEY      => PaymentMethod::class,
             ShippingMethod::MORPH_KEY     => ShippingMethod::class,

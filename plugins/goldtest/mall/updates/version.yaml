@@ -1,1 +1,4 @@
-1.0.1: First version
+1.0.1: 'First version'
+1.0.2:
+    - 'Created table goldtest_mall_discount_trigger'
+    - builder_table_create_goldtest_mall_discount_trigger.php

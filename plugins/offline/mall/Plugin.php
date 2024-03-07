@@ -1,6 +1,6 @@
 <?php namespace OFFLINE\Mall;
 
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use OFFLINE\Mall\Classes\Registration\BootComponents;
 use OFFLINE\Mall\Classes\Registration\BootEvents;

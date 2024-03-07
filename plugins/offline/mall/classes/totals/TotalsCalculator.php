@@ -3,6 +3,8 @@
 namespace OFFLINE\Mall\Classes\Totals;
 
 use Carbon\Carbon;
+use Goldtest\Mall\Classes\DiscountCustomer;
+use Goldtest\Mall\Models\DiscountTrigger;
 use Illuminate\Support\Collection;
 use OFFLINE\Mall\Classes\Cart\DiscountApplier;
 use OFFLINE\Mall\Models\CartProduct;
@@ -70,6 +72,10 @@ class TotalsCalculator
     /**
      * @var Collection
      */
+    protected $appliedDiscountCustomerGroup;
+    /**
+     * @var Collection
+     */
     public $shippingTaxes;
     /**
      * @var int
@@ -87,9 +93,10 @@ class TotalsCalculator
     public function __construct(TotalsCalculatorInput $input)
     {
         $this->input = $input;
+        //dd('plugins\offline\mall\classes\totals\TotalsCalculator.php::calculate');
         $this->taxes = new Collection();
-
         $this->calculate();
+        //dd('plugins\offline\mall\classes\totals\TotalsCalculator.php::calculate');
     }
 
     protected function calculate()
@@ -104,7 +111,13 @@ class TotalsCalculator
         $this->shippingTotal = new ShippingTotal($this->input->shipping_method, $this);
         $this->totalPreTaxes = $this->productPreTaxes + $this->shippingTotal->totalPreTaxes();
 
-        $this->totalDiscounts = $this->productPostTaxes - $this->applyTotalDiscounts($this->productPostTaxes);
+        $discount = $this->productPostTaxes -  $this->applyTotalDiscounts($this->productPostTaxes);
+        $discountCustomerGroup = $this->productPostTaxes -  $this->applyTotalDiscountCustomerGroup($this->productPostTaxes);
+        //dd($discount);
+        //dd($discountCustomerGroup);
+        //dd($this->productPostTaxes);
+        $this->totalDiscounts = $discount + $discountCustomerGroup;
+        //dd($this->totalDiscounts);
 
         $this->totalPrePayment = $this->productPostTaxes - $this->totalDiscounts + $this->shippingTotal->totalPostTaxes();
         $this->paymentTaxes    = $this->filterPaymentTaxes();
@@ -260,26 +273,60 @@ class TotalsCalculator
         return $this->appliedDiscounts;
     }
 
+    public function appliedDiscountCustomerGroup(): Collection
+    {
+        return $this->appliedDiscountCustomerGroup;
+    }
+
     /**
      * Process the discounts that are applied to the cart's total.
      */
     protected function applyTotalDiscounts($total): ?float
     {
-        $nonCodeTriggers = Discount::whereIn('trigger', ['total', 'product', 'products'])
+        $nonCodeTriggers = DiscountTrigger::select([
+            'goldtest_mall_discount_trigger.*',
+            'offline_mall_discounts.name',
+            'offline_mall_discounts.valid_from',
+            'offline_mall_discounts.expires',
+            'offline_mall_discounts.type',
+            'offline_mall_discounts.rate',
+            'offline_mall_discounts.max_number_of_usages',
+            'offline_mall_discounts.number_of_usages',
+            'offline_mall_discounts.shipping_description',
+            'offline_mall_discounts.shipping_guaranteed_days_to_delivery'
+        ])->with(['discount'])
+            ->join('offline_mall_discounts', 'goldtest_mall_discount_trigger.discount_id', 'offline_mall_discounts.id')
+            ->whereIn('goldtest_mall_discount_trigger.trigger', ['total', 'product', 'products'])
+            ->whereNotIn('offline_mall_discounts.type', ['shipping']) //modifier par manitra
             ->where(function ($q) {
-                $q->whereNull('valid_from')
-                    ->orWhere('valid_from', '<=', Carbon::now());
+                $q->whereNull('offline_mall_discounts.valid_from')
+                    ->orWhere('offline_mall_discounts.valid_from', '<=', Carbon::now());
             })->where(function ($q) {
-                $q->whereNull('expires')
-                    ->orWhere('expires', '>', Carbon::now());
+                $q->whereNull('offline_mall_discounts.expires')
+                    ->orWhere('offline_mall_discounts.expires', '>', Carbon::now());
             })->get();
-
-        $discounts = $this->input->discounts->merge($nonCodeTriggers)->reject(function ($item) {
-            return $item->type === 'shipping';
-        });
+        //dd(json_decode(json_encode($this->input->discounts)));
+        /*$discounts = $this->input->discounts->merge($nonCodeTriggers)->reject(function ($item) {
+            return $item->discount->type === 'shipping';  //modifier par manitra
+        });*/
+        $discounts = $this->input->discounts->merge($nonCodeTriggers);
 
         $applier                = new DiscountApplier($this->input, $total);
+        //dd(json_decode(json_encode($discounts)));
         $this->appliedDiscounts = $applier->applyMany($discounts);
+        //dd($applier);
+
+        return $applier->reducedTotal();
+    }
+
+    /**
+     * Process the discounts that are applied to the cart's total.
+     */
+    protected function applyTotalDiscountCustomerGroup($total): ?float
+    {
+        $applier                = new DiscountCustomer($this->input, $total);
+        //dd(json_decode(json_encode($discounts)));
+        $this->appliedDiscountCustomerGroup = $applier->apply();
 
         return $applier->reducedTotal();
     }

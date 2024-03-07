@@ -1,4 +1,6 @@
-<?php namespace OFFLINE\Mall\Components;
+<?php
+
+namespace OFFLINE\Mall\Components;
 
 use Auth;
 use Flash;
@@ -109,7 +111,9 @@ class Cart extends MallComponent
      */
     public function init()
     {
+        //dd('init');
         $this->addComponent(DiscountApplier::class, 'discountApplier', []);
+        //dd('init');
     }
 
     /**
@@ -120,6 +124,7 @@ class Cart extends MallComponent
     public function onRun()
     {
         $this->setData();
+        //dd('init');
     }
 
     /**
@@ -130,18 +135,26 @@ class Cart extends MallComponent
     public function setData()
     {
         $cart = CartModel::byUser(Auth::getUser());
-        $cart->load(['products', 'products.custom_field_values', 'discounts']);
+        //dd($cart->load(['products', 'products.custom_field_values', 'discounts']));
+        //dd('init');
+        $cart->load(['products', 'products.custom_field_values', 'discounts', 'discounts.discount']);
+        //dd($cart);
         if ($cart->shipping_method_id === null) {
             $cart->setShippingMethod(ShippingMethod::getDefault());
         }
+        //dd('plugins\offline\mall\components\Cart.php::setData');
         $cart->validateShippingMethod();
-
+        //dd('init');
         /* CUSTOM logic to remove promocodes if implicitly discount is set to product or cart total*/
         $hasAppliedNonTriggerCode = $cart->checkPromocodeAndDiscounts();
+        //dd(json_decode(json_encode($cart)));
         /*end*/
-
+        //dd('init');
+        //dd($cart);
+        //dd($cart->totals);
         $this->setVar('cart', $cart);
         $this->setVar('hasAppliedNonTriggerCode', $hasAppliedNonTriggerCode);
+        $this->setVar('checkMaxDiscountCodeApply', $cart->checkMaxDiscountCodeApply());
         $this->setVar('productPage', GeneralSettings::get('product_page'));
         $this->setVar('showDiscountApplier', $this->property('showDiscountApplier'));
         $this->setVar('showShipping', $this->property('showShipping'));

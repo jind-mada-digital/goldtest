@@ -16,6 +16,6 @@ class Variants extends Controller
     public $formConfig = 'config_form.yaml';
 
     public $requiredPermissions = [
-        'offline.mall.manage_products',
+        'offline.mall.manage_products', 
     ];
 }

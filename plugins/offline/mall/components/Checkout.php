@@ -7,7 +7,7 @@ use October\Rain\Exception\ValidationException;
 use OFFLINE\Mall\Classes\Payments\PaymentGateway;
 use OFFLINE\Mall\Classes\Payments\PaymentRedirector;
 use OFFLINE\Mall\Classes\Payments\PaymentService;
-use OFFLINE\Mall\Components\Cart as CartComponent;
+use Goldtest\Mall\Components\Cart as CartComponent;
 use OFFLINE\Mall\Models\Cart;
 use OFFLINE\Mall\Models\GeneralSettings;
 use OFFLINE\Mall\Models\Order;
@@ -115,7 +115,7 @@ class Checkout extends MallComponent
      */
     public function init()
     {
-        $this->addComponent(CartComponent::class, 'cart', ['showDiscountApplier' => false]);
+        $this->addComponent(CartComponent::class, 'goldtestCart', ['showDiscountApplier' => false]);
 
         if ($this->param('step') === 'confirm') {
             $this->addComponent(AddressSelector::class, 'billingAddressSelector', ['type' => 'billing']);

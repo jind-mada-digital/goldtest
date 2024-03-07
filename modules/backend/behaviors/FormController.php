@@ -287,6 +287,7 @@ class FormController extends ControllerBehavior
             );
 
             $model = $this->controller->formFindModelObject($recordId);
+            
             $this->initForm($model);
         }
         catch (Exception $ex) {

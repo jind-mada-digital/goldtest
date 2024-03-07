@@ -1,0 +1,9 @@
+discount_triggers:
+    label: 'offline.mall::lang.discount_trigger'
+    view:
+        list: $/goldtest/mall/models/discounttrigger/columns.yaml
+        toolbarPartial: trigger_toolbar
+    manage:
+        form: $/goldtest/mall/models/discounttrigger/fields.yaml
+        recordsPerPage: 10
+    deferredBinding: true

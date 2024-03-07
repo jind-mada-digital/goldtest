@@ -1,8 +1,13 @@
-<?php namespace OFFLINE\Mall\FormWidgets;
+<?php
+
+namespace OFFLINE\Mall\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
 use October\Rain\Exception\ValidationException;
+use October\Rain\Html\Helper;
 use OFFLINE\Mall\Models\Currency;
+use OFFLINE\Mall\Models\Price as ModelsPrice;
+use stdClass;
 
 /**
  * Copied from RainLab.Translate's MLText
@@ -43,7 +48,9 @@ class Price extends FormWidgetBase
         if ($this->formField->required !== true) {
             return null;
         }
-
+        if (is_array($this->formField->value) && array_get($this->formField->value, '_' . $this->defaultCurrency->id, null)) {
+            throw new ValidationException([$this->valueFrom => trans('offline.mall::lang.common.price_missing')]);
+        }
         $values = collect(post('MallPrice'))->map(function ($value, $key) {
             if ($value[$this->valueFrom] === '' || $value[$this->valueFrom] === null) {
                 return null;
@@ -52,7 +59,7 @@ class Price extends FormWidgetBase
             return $key;
         })->filter();
 
-        if ( ! $values->has($this->defaultCurrency->id)) {
+        if (!$values->has($this->defaultCurrency->id)) {
             throw new ValidationException([$this->valueFrom => trans('offline.mall::lang.common.price_missing')]);
         }
 
@@ -98,7 +105,13 @@ class Price extends FormWidgetBase
     public function getPriceValue($currency)
     {
         $value = $this->getLoadValue();
-        if ( ! $value) {
+        if (!$value) {
+            if ($this->data && ($all_currency = object_get($this->data, ltrim($this->valueFrom, '_')))) {
+                $mall_price = ModelsPrice::find(array_get(collect($all_currency)->firstWhere('currency.id', '=', $currency), 'id', null));
+                if ($mall_price) {
+                    return $mall_price->decimal;
+                }
+            }
             return null;
         }
 
@@ -106,10 +119,9 @@ class Price extends FormWidgetBase
     }
 
     public function getLoadValue()
-    {
+    { //nameToArray
         $relation = ltrim($this->valueFrom, '_');
-
-        if ( ! $this->model->hasRelation($relation)) {
+        if (!$this->model->hasRelation($relation)) {
             return null;
         }
 

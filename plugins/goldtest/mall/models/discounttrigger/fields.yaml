@@ -1,0 +1,61 @@
+fields:
+    section_trigger:
+        label: 'goldtest.mall::lang.discounts.section_trigger'
+        span: left
+        type: section
+    trigger:
+        label: 'goldtest.mall::lang.discounts.trigger'
+        showSearch: true
+        span: left
+        cssClass: discount-condition-repeat-select-trigger
+        type: dropdown
+    _totals_to_reach:
+        label: 'goldtest.mall::lang.discounts.total_to_reach'
+        oc.commentPosition: ''
+        span: right
+        trigger:
+            action: show
+            field: trigger
+            condition: 'value[total]'
+        type: mall.price
+    code:
+        label: 'goldtest.mall::lang.discounts.code'
+        span: right
+        trigger:
+            action: show
+            field: trigger
+            condition: 'value[code]'
+        type: text
+        comment: 'goldtest.mall::lang.discounts.code_comment'
+    product_id:
+        label: 'goldtest.mall::lang.discounts.product'
+        showSearch: true
+        span: right
+        trigger:
+            action: show
+            field: trigger
+            condition: 'value[product]'
+        type: dropdown
+    product_ids:
+        label: 'goldtest.mall::lang.discounts.products'
+        type: taglist
+        nameFrom: name
+        descriptionFrom: description
+        useKey: true
+        options: true
+        span: right
+        customTags: false
+        trigger:
+            action: show
+            field: trigger
+            condition: 'value[products]'
+    discount_id:
+        label: Discount
+        type: partial
+        path: $/goldtest/mall/models/discounttrigger/_hidden.htm
+        cssClass: hidden
+    id:
+        label: DiscountTrigger
+        type: partial
+        path: $/goldtest/mall/models/discounttrigger/_hidden.htm
+        cssClass: hidden

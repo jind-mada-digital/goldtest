@@ -1,0 +1,15 @@
+<ul class="p-l">
+    <?php foreach ($record->discount_triggers as $discount_trigger): ?>
+    <?php if($discount_trigger->trigger == 'products'): ?>
+    <?php foreach($discount_trigger->products as $product):?>
+    <li>
+        <?= e($product->name) ?>
+    </li>
+    <?php endforeach?>
+    <?php elseif($discount_trigger->trigger == 'product' && $discount_trigger->product): ?>
+    <li>
+        <?= e($discount_trigger->product->name) ?>
+    </li>
+    <?php endif ?>
+    <?php endforeach ?>
+</ul>

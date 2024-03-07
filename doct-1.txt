@@ -1,0 +1,12 @@
+offline.mall::lang.discounts.shipping_price
+
+discount_triggers:
+        label: 'Combinaison du réduction'
+        prompt: 'Ajouter un autre condition'
+        maxItems: '5'
+        span: full
+        cssClass: discount-condition-multiple
+        type: repeater
+        commentAbove: 'Créer plusieurs réductions'
+        form: $/goldtest/mall/models/discounttrigger/fields.yaml
+                    

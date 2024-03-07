@@ -6,7 +6,7 @@ is_hidden = 0
 [viewBag]
 localeUrl[en] = "/cart"
 
-[cart]
+[goldtestCart]
 showTaxes = 0
 
 [goldtestDiscountApplier discountApplier]
@@ -43,9 +43,8 @@ showTaxes = 0
         <h1 class="small-page-heading">{{ 'Panier'|_ }}</h1>
     </div>
 </div>
-
 <div class="container">
-    {% component 'cart' %}
+    {% component 'goldtestCart' %}
 </div>
 
 {% if cart.products.count > 0 %}

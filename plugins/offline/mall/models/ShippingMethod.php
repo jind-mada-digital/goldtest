@@ -1,4 +1,6 @@
-<?php namespace OFFLINE\Mall\Models;
+<?php
+
+namespace OFFLINE\Mall\Models;
 
 use Closure;
 use Illuminate\Support\Facades\Session;
@@ -97,9 +99,9 @@ class ShippingMethod extends Model
     public function afterDelete()
     {
         \DB::table('offline_mall_prices')
-           ->where('priceable_type', self::MORPH_KEY)
-           ->where('priceable_id', $this->id)
-           ->delete();
+            ->where('priceable_type', self::MORPH_KEY)
+            ->where('priceable_id', $this->id)
+            ->delete();
     }
 
     public static function getDefault(): self
@@ -145,16 +147,17 @@ class ShippingMethod extends Model
         if ($cart->is_virtual) {
             return collect([]);
         }
-
+        //dd('plugins\offline\mall\models\ShippingMethod.php $cart->totals()->productPostTaxes()');
         $total = $cart->totals()->productPostTaxes();
+        //dd('plugins\offline\mall\models\ShippingMethod.php getAvailableByCart');
 
         return self
             ::orderBy('sort_order')
             ->when($cart->shipping_address, function ($q) use ($cart) {
                 $q->whereDoesntHave('countries')
-                  ->orWhereHas('countries', function ($q) use ($cart) {
-                      $q->where('country_id', $cart->shipping_address->country_id);
-                  });
+                    ->orWhereHas('countries', function ($q) use ($cart) {
+                        $q->where('country_id', $cart->shipping_address->country_id);
+                    });
             })
             ->get()
             ->filter(function (ShippingMethod $method) use ($total) {

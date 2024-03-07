@@ -23,18 +23,24 @@ class DiscountApplier extends DefaultDiscountApplier
      */
     public function onApplyDiscount()
     {
-        $cart = Cart::byUser(Auth::getUser());
+        /*$cart = Cart::byUser(Auth::getUser());*/
 
         /* CUSTOM logic to remove promocodes if implicitly discount is set to product or cart total*/
-        $hasAppliedNonTriggerCode = $cart->checkPromocodeAndDiscounts();
+        /*$hasAppliedNonTriggerCode = $cart->checkPromocodeAndDiscounts();*/
         /*end*/
 
-        if($cart->discounts->count() > 0 || $hasAppliedNonTriggerCode) {
+        /*if($cart->discounts->count() > 0 || $hasAppliedNonTriggerCode) {
             throw new ValidationException([
                 'code' => trans('goldtest.mall::lang.components.discountApplier.onlyOneCouponError'),
             ]);
-        }
+        }*/
         parent::onApplyDiscount();
     }
-}
 
+    public function onRemoveDiscountCode()
+    {
+        $id = $this->decode(input('id'));
+        $cart = Cart::byUser(Auth::getUser());
+        $cart->discounts()->detach($id);
+    }
+}

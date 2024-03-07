@@ -1,0 +1,9 @@
+<ul class="p-l">
+    <?php foreach ($record->discount_triggers as $discount_trigger): ?>
+    <?php if($discount_trigger->trigger == 'total'): ?>
+    <li>
+        <?= e($discount_trigger->totalToReach()->string) ?>
+    </li>
+    <?php endif ?>
+    <?php endforeach ?>
+</ul>
